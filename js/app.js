@@ -1,5 +1,5 @@
 import { GAMES } from './games/index.js';
-import { sfx, say, stopSpeech, unlockAudio, isMuted, setMuted, animalSound } from './audio.js';
+import { sfx, say, stopSpeech, unlockAudio, isMuted, setMuted, animalSound, stopAnimalSound } from './audio.js';
 import { animal, blox, sun, ANIMALS } from './characters.js';
 import { h, pick, rnd, sleep } from './util.js';
 
@@ -196,8 +196,15 @@ function endCurrent() {
     current.session.end();
     current = null;
     stopSpeech();
+    stopAnimalSound();
+    document.querySelectorAll('.celebrate, .confetti').forEach((el) => el.remove());
   }
 }
+
+// Quiet everything when the app is put in the background.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { stopSpeech(); stopAnimalSound(); }
+});
 
 window.addEventListener('popstate', () => {
   if (current) showHome();

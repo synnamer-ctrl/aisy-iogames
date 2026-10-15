@@ -10,8 +10,13 @@ export function isMuted() { return muted; }
 export function setMuted(v) {
   muted = v;
   try { localStorage.setItem('aisy-muted', v ? '1' : '0'); } catch { /* ignore */ }
-  if (v) stopSpeech();
+  if (v) { stopSpeech(); stopAnimalSound(); }
 }
+
+// iOS suspends/interrupts audio when the app goes to the background; wake it on the next touch.
+document.addEventListener('pointerdown', () => {
+  if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {});
+}, { capture: true });
 
 export function unlockAudio() {
   const AC = window.AudioContext || window.webkitAudioContext;
@@ -110,6 +115,11 @@ export function preloadAnimalSounds() {
     } catch { /* missing or undecodable: callers fall back to speech */ }
   }));
   return loading;
+}
+
+export function stopAnimalSound() {
+  try { playing?.stop(); } catch { /* already stopped */ }
+  playing = null;
 }
 
 // Plays the real recording; resolves true when it finishes, false if unavailable.

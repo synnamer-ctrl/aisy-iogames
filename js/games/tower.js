@@ -24,7 +24,7 @@ export default {
     function layout() {
       W = root.clientWidth; H = root.clientHeight;
       groundY = root.querySelector('.ground').offsetTop;
-      bs = Math.min(W * 0.24, H * 0.13);
+      bs = Math.min(W * 0.26, H * 0.16);
       bh = (bs * 210) / 200;
       topY = Math.max(84, H * 0.1);
       maxBlocks = Math.max(4, Math.min(9, Math.floor((groundY - topY - bh * 1.6) / (bs * 0.88))));
@@ -116,6 +116,23 @@ export default {
       layout();
       newMover();
     }
+
+    // Rotating the device: rebuild sizes and re-stack the tower in place.
+    let lastW = 0;
+    const onResize = () => {
+      if (!root.isConnected || dropping || root.clientWidth === lastW) return;
+      const oldW = W;
+      layout();
+      lastW = W;
+      stack.forEach((b, i) => {
+        b.x = (b.x / oldW) * W;
+        b.el.style.width = bs + 'px'; b.el.style.height = bh + 'px';
+        b.el.style.transform = `translate(${b.x - bs / 2}px, ${yFor(i)}px)`;
+      });
+      if (mover) { mover.style.width = bs + 'px'; mover.style.height = bh + 'px'; }
+    };
+    window.addEventListener('resize', onResize);
+    api.onExit(() => window.removeEventListener('resize', onResize));
 
     root.addEventListener('pointerdown', (e) => { if (!e.target.closest('button')) drop(); });
     layout();

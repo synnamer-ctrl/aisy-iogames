@@ -40,8 +40,8 @@ export default {
         row.appendChild(b);
       });
       await api.say('Listen! Who says this?');
-      await play();
-      busy = false;
+      busy = false; // answers count while the sound is still playing
+      play();
     }
 
     async function choose(b, k) {
@@ -51,8 +51,8 @@ export default {
         api.sfx.wrong();
         flash(b, 'no', 600);
         await api.say(`That's the ${ANIMALS[k].name}. Listen again!`);
-        await play();
         busy = false;
+        play();
         return;
       }
       busy = true;
