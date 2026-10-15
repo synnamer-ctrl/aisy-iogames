@@ -50,6 +50,7 @@ export default {
             bigNum.classList.add('show');
             field.querySelectorAll('.counter-pal').forEach((p) => p.classList.add('happy', 'talk'));
             api.sfx.success();
+            await api.sound(kind);
             await api.say(`${WORDS[n]} ${n === 1 ? ANIMALS[kind].name : ANIMALS[kind].plural}! ${api.praise()}`);
             await api.wait(500);
             rounds++;

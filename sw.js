@@ -1,16 +1,17 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v2';
+const VERSION = 'aisy-v5';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
-  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/characters.js', 'js/util.js',
+  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/toon.js', 'js/toon-animals.js', 'js/characters.js', 'js/util.js',
   'js/games/index.js', 'js/games/bubbles.js', 'js/games/feed.js', 'js/games/colors.js',
   'js/games/counting.js', 'js/games/shapes.js', 'js/games/peekaboo.js', 'js/games/tower.js',
-  'js/games/memory.js', 'js/games/piano.js', 'js/games/paint.js',
+  'js/games/memory.js', 'js/games/piano.js', 'js/games/paint.js', 'js/games/sounds.js', 'js/games/whosays.js',
+  ...['cat', 'dog', 'bunny', 'bear', 'frog', 'squirrel', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'].map((k) => `sounds/${k}.mp3`),
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png',
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(VERSION).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(VERSION).then((c) => Promise.all(ASSETS.map((a) => c.add(a).catch(() => {})))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (e) => {

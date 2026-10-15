@@ -8,5 +8,7 @@ import tower from './tower.js';
 import memory from './memory.js';
 import piano from './piano.js';
 import paint from './paint.js';
+import sounds from './sounds.js';
+import whosays from './whosays.js';
 
-export const GAMES = [bubbles, feed, colors, counting, shapes, peekaboo, tower, memory, piano, paint];
+export const GAMES = [sounds, whosays, bubbles, feed, colors, counting, shapes, peekaboo, tower, memory, piano, paint];

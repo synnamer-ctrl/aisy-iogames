@@ -1,11 +1,14 @@
 # Aisy's Play Land 🐻🧱🎈
 
-A toddler game box (made for ages 3–4): **10 cartoon mini-games in one installable, offline PWA.**
-No ads, no reading needed. A friendly voice explains every game, and all the characters blink,
-breathe, wiggle their ears and cheer.
+A toddler game box (made for ages 3–4): **12 mini-games in one installable, offline PWA.**
+No ads, no reading needed. A friendly voice explains every game. The animals are soft 3D-style
+cartoon baby animals (smooth shading, glossy eyes, no outlines) that blink, look around, talk and wag,
+and they make **real recorded animal sounds** (see `sounds/CREDITS.md`).
 
 | # | Game | What your child practices |
 |---|------|---------------------------|
+| ★ | **Animal Sounds** – tap any of 12 animals to hear its real sound | animal sounds & names |
+| ★ | **Who Says That?** – a real sound plays, tap the animal that made it | listening, matching |
 | 1 | **Bubble Pop** – tap rising bubbles to free the animals inside | tapping, animal names |
 | 2 | **Feed Me** – drag (or tap) the right food to the hungry animal | matching, fine motor drag |
 | 3 | **Colors** – "Find red!" with smiling Blox buddies | color names |
@@ -25,7 +28,9 @@ and a big orange 🏠 button to go home. 🔊 toggles all sound.
 
 - Plain HTML/CSS/JS ES modules, no build step and no dependencies.
 - Every character is a hand-drawn SVG (`js/characters.js`) animated with CSS (`css/style.css`).
-- Sound effects are synthesized with WebAudio. The voice uses the device's built-in speech.
+- Animals are SVG in a 3D-render cartoon style (`js/toon.js` shading kit, `js/toon-animals.js` drawings).
+- Real animal recordings live in `sounds/` (CC0 / public domain / CC BY, credited in-app via the ⓘ button).
+- Other sound effects are synthesized with WebAudio. The voice uses the device's built-in speech.
 - `sw.js` caches everything so it works fully offline once opened.
 
 ## Run locally

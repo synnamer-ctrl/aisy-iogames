@@ -28,6 +28,7 @@ export default {
       const others = sample(Object.values(FOOD_FOR).filter((f) => f !== want), 2);
       spot.innerHTML = `<div class="eater open">${animal(kind)}</div><div class="thought">${food(want)}</div>`;
       const eater = spot.querySelector('.eater');
+      eater.addEventListener('pointerdown', () => { if (!busy) { flash(eater, 'wiggle', 500); api.sound(kind); } });
       flash(eater, 'pop-in', 600);
       tray.innerHTML = '';
       dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < fed % 5 ? 'on' : ''}"></i>`).join('');
@@ -65,7 +66,8 @@ export default {
           api.sfx.success();
           fed++;
           dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < (fed % 5 || 5) ? 'on' : ''}"></i>`).join('');
-          await api.say(`Yum yum! ${ANIMALS[kind].sound}`);
+          await api.say('Yum yum!');
+          await api.sound(kind);
           await api.wait(400);
           if (fed % 5 === 0) await api.celebrate('All the friends are full! Great job!');
           round();
