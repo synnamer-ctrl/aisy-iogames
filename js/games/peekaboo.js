@@ -51,6 +51,7 @@ export default {
         s.classList.add('up');
         if (k !== target) {
           s.querySelector('.hider').classList.add('talk');
+          await api.sound(k);
           await api.say(`Hi! I'm the ${ANIMALS[k].name}!`, { pitch: 1.5 });
           await api.wait(300);
           s.classList.remove('up');
@@ -63,7 +64,8 @@ export default {
         api.confetti(30);
         found++;
         dots.innerHTML = Array.from({ length: 4 }, (_, i) => `<i class="${i < (found % 4 || 4) ? 'on' : ''}"></i>`).join('');
-        await api.say(`Peekaboo! You found the ${ANIMALS[k].name}! ${ANIMALS[k].sound}`);
+        await api.say(`Peekaboo! You found the ${ANIMALS[k].name}!`);
+        await api.sound(k);
         await api.wait(500);
         if (found % 4 === 0) await api.celebrate('You found everybody! Hooray!');
         round();

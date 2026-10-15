@@ -58,13 +58,14 @@ export default {
           [a.c, b.c].forEach((x) => x.classList.add('matched', 'happy', 'talk'));
           matched++;
           if (matched === pairs) {
+            await api.sound(a.k);
             await api.say(`Two ${ANIMALS[a.k].plural}!`);
             level++;
             await api.celebrate('You found all the pairs!');
             round();
             return;
           }
-          api.say(`${cap(ANIMALS[a.k].name)}! ${cap(ANIMALS[a.k].name)}! A match!`);
+          api.sound(a.k).then(() => api.say(`${cap(ANIMALS[a.k].name)}! A match!`));
           lock = false;
         } else {
           await api.wait(900);

@@ -65,7 +65,8 @@ export default {
           api.sfx.success();
           fed++;
           dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < (fed % 5 || 5) ? 'on' : ''}"></i>`).join('');
-          await api.say(`Yum yum! ${ANIMALS[kind].sound}`);
+          await api.say('Yum yum!');
+          await api.sound(kind);
           await api.wait(400);
           if (fed % 5 === 0) await api.celebrate('All the friends are full! Great job!');
           round();

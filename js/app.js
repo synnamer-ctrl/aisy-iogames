@@ -1,6 +1,6 @@
 import { GAMES } from './games/index.js';
-import { sfx, say, stopSpeech, unlockAudio, isMuted, setMuted } from './audio.js';
-import { animal, blox, sun } from './characters.js';
+import { sfx, say, stopSpeech, unlockAudio, isMuted, setMuted, animalSound } from './audio.js';
+import { animal, blox, sun, ANIMALS } from './characters.js';
 import { h, pick, rnd, sleep } from './util.js';
 
 const app = document.getElementById('app');
@@ -17,6 +17,11 @@ function makeSession(stage) {
     cleanups: [],
     sfx,
     say: (t, o) => (s.alive ? say(t, o) : Promise.resolve()),
+    // Real animal recording; falls back to saying the sound if it can't play.
+    sound: async (kind) => {
+      if (!s.alive) return;
+      if (!(await animalSound(kind)) && s.alive) await say(ANIMALS[kind].sound);
+    },
     // Promise that simply never resolves once the player has left the game,
     // so `await api.wait()` chains stop on their own.
     wait: (ms) => new Promise((r) => {
@@ -119,7 +124,11 @@ function showHome() {
       </header>
       <div class="tiles"></div>
     </section>`);
-  el.querySelector('.home-top').appendChild(muteBtn());
+  const tools = h('<div class="home-tools"></div>');
+  const info = h('<button class="round-btn" aria-label="Credits for grown-ups">ⓘ</button>');
+  info.addEventListener('click', showCredits);
+  tools.append(info, muteBtn());
+  el.querySelector('.home-top').appendChild(tools);
   const tiles = el.querySelector('.tiles');
   GAMES.forEach((g, i) => {
     const t = h(`<button class="tile" style="--bg:${g.color};--i:${i}" aria-label="${g.title}">
@@ -134,6 +143,23 @@ function showHome() {
     tiles.appendChild(t);
   });
   app.appendChild(el);
+}
+
+// Grown-up page: where the real animal recordings come from (some licences require credit).
+function showCredits() {
+  const ov = h(`<div class="credits"><div class="credits-card">
+      <h2>Animal sound credits</h2>
+      <ul>
+        <li>Kitten, puppy, cow, frog, chick: BigSoundBank.com by Joseph Sardin (CC0)</li>
+        <li>Lion, elephant, chimpanzee: Mike Koenig, SoundBible.com (CC BY 3.0)</li>
+        <li>Bear: U.S. Fish &amp; Wildlife Service via SoundBible.com (public domain)</li>
+        <li>Pig: "Pig grunt" by erdie, Wikimedia Commons (CC BY 3.0)</li>
+        <li>Rabbit: "Rabbit oinks and squeaks" by kessir, Wikimedia Commons (CC0)</li>
+      </ul>
+      <p>Clips were trimmed and volume-levelled. Licences: CC0 and public domain need no credit; CC BY 3.0 = creativecommons.org/licenses/by/3.0</p>
+      <button>OK</button></div></div>`);
+  ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'BUTTON') ov.remove(); });
+  document.body.appendChild(ov);
 }
 
 function openGame(game) {

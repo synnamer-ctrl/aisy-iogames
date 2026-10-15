@@ -23,6 +23,7 @@ export function unlockAudio() {
     master.connect(ctx.destination);
   }
   if (ctx.state === 'suspended') ctx.resume();
+  preloadAnimalSounds();
   // Prime speech on iOS: it must start inside a user gesture once.
   if ('speechSynthesis' in window) {
     const u = new SpeechSynthesisUtterance(' ');
@@ -91,6 +92,42 @@ export const sfx = {
     tone({ type: 'sine', from: freq * 3, dur: dur * 0.4, vol: 0.05 });
   },
 };
+
+/* ---------- real animal recordings (sounds/*.mp3) ---------- */
+export const SOUND_KINDS = ['cat', 'dog', 'bunny', 'bear', 'frog', 'pig', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'];
+const buffers = {};
+let loading = null;
+let playing = null;
+
+export function preloadAnimalSounds() {
+  if (loading || !ctx) return loading;
+  loading = Promise.all(SOUND_KINDS.map(async (k) => {
+    try {
+      const res = await fetch(`sounds/${k}.mp3`);
+      if (!res.ok) return;
+      const data = await res.arrayBuffer();
+      buffers[k] = await new Promise((ok, bad) => ctx.decodeAudioData(data, ok, bad));
+    } catch { /* missing or undecodable: callers fall back to speech */ }
+  }));
+  return loading;
+}
+
+// Plays the real recording; resolves true when it finishes, false if unavailable.
+export async function animalSound(kind) {
+  if (muted || !ctx) return false;
+  if (!buffers[kind] && loading) await loading;
+  const buf = buffers[kind];
+  if (!buf) return false;
+  try { playing?.stop(); } catch { /* already stopped */ }
+  const src = ctx.createBufferSource();
+  const g = ctx.createGain();
+  src.buffer = buf;
+  g.gain.value = 1.4;
+  src.connect(g).connect(master);
+  playing = src;
+  src.start();
+  return new Promise((r) => { src.onended = () => r(true); setTimeout(() => r(true), buf.duration * 1000 + 300); });
+}
 
 /* ---------- speech ---------- */
 let voice = null;

@@ -1,5 +1,5 @@
-import { animal, ANIMALS, ANIMAL_KINDS } from '../characters.js';
-import { h, pick, rnd, cap } from '../util.js';
+import { animal, ANIMAL_KINDS } from '../characters.js';
+import { h, pick, rnd } from '../util.js';
 
 export default {
   id: 'bubbles',
@@ -71,8 +71,8 @@ export default {
       counter.textContent = '⭐'.repeat(pops % 10 || 10);
       if (pops % 10 === 0) {
         api.celebrate('Wow! Ten bubbles! You are a super bubble popper!');
-      } else if (Math.random() < 0.6) {
-        api.say(cap(ANIMALS[kind].name) + '!', { rate: 1 });
+      } else {
+        api.sound(kind);
       }
     }
 
