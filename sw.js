@@ -1,8 +1,8 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v1';
+const VERSION = 'aisy-v2';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
-  'js/app.js', 'js/audio.js', 'js/characters.js', 'js/util.js',
+  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/characters.js', 'js/util.js',
   'js/games/index.js', 'js/games/bubbles.js', 'js/games/feed.js', 'js/games/colors.js',
   'js/games/counting.js', 'js/games/shapes.js', 'js/games/peekaboo.js', 'js/games/tower.js',
   'js/games/memory.js', 'js/games/piano.js', 'js/games/paint.js',

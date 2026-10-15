@@ -22,6 +22,12 @@ svg { display: block; }
 .char .c-ears { animation: ears 3.2s ease-in-out infinite; animation-delay: var(--d, 0s); transform-box: fill-box; transform-origin: 50% 90%; }
 .char .c-arm-l { animation: armL 2.6s ease-in-out infinite; animation-delay: var(--d, 0s); transform-box: fill-box; transform-origin: 80% 10%; }
 .char .c-arm-r { animation: armR 2.6s ease-in-out infinite; animation-delay: var(--d, 0s); transform-box: fill-box; transform-origin: 20% 10%; }
+.char .c-tail { animation: tail 1.8s ease-in-out infinite alternate; animation-delay: var(--d, 0s); transform-box: fill-box; transform-origin: 0% 100%; }
+.happy .c-tail { animation-duration: .25s; }
+.char .c-leg-l, .char .c-leg-r { transform-box: fill-box; transform-origin: 50% 0; }
+.happy .c-leg-r { animation: paw .35s ease-in-out infinite alternate; }
+@keyframes tail { from { transform: rotate(-6deg); } to { transform: rotate(8deg); } }
+@keyframes paw { from { transform: rotate(0); } to { transform: rotate(-28deg); } }
 .char .c-trunk { animation: trunk 3s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 0; }
 .char .c-open { display: none; }
 .open .c-open, .talk .c-open, .sing .c-open { display: inline; }
@@ -34,7 +40,7 @@ svg { display: block; }
 
 @keyframes bob { 0%, 100% { transform: translateY(0) scale(1, 1); } 50% { transform: translateY(-5px) scale(1.025, .975); } }
 @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
-@keyframes look { 0%, 40%, 100% { transform: translate(0, 0); } 50%, 60% { transform: translate(-3px, 0); } 70%, 85% { transform: translate(3px, -1px); } }
+@keyframes look { 0%, 40%, 100% { transform: translate(0, 0); } 50%, 60% { transform: translate(-2px, 0); } 70%, 85% { transform: translate(2px, -1px); } }
 @keyframes ears { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(2.5deg); } 75% { transform: rotate(-2deg); } }
 @keyframes armL { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(8deg); } }
 @keyframes armR { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-8deg); } }
