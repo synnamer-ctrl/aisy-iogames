@@ -52,7 +52,7 @@ export function blox(color, cls = '') {
 }
 
 /* ---------- Foods ---------- */
-export const FOOD_FOR = { bunny: 'carrot', dog: 'bone', monkey: 'banana', cat: 'fish', bear: 'honey', chick: 'corn', pig: 'apple', panda: 'bamboo' };
+export const FOOD_FOR = { bunny: 'carrot', dog: 'bone', monkey: 'banana', cat: 'fish', bear: 'honey', chick: 'corn', squirrel: 'acorn', panda: 'bamboo' };
 const FOODS = {
   carrot: `<path d="M52 94 L28 36 Q50 24 72 36 Z" fill="#FF922B" ${st(4)}/>
     <path d="M38 48 l10 2 M44 64 l10 2 M48 80 l8 1" stroke="${OL}" stroke-width="3" stroke-linecap="round"/>
@@ -74,6 +74,11 @@ const FOODS = {
   apple: `<path d="M50 30 C 30 18, 10 34, 14 58 C 18 84, 38 96, 50 88 C 62 96, 82 84, 86 58 C 90 34, 70 18, 50 30 Z" fill="#FF5A5F" ${st(4)}/>
     <path d="M50 30 Q48 16 54 8" fill="none" stroke="#7A4E2A" stroke-width="5" stroke-linecap="round"/>
     <path d="M54 18 Q66 6 78 14 Q68 26 54 18 Z" fill="#51CF66" ${st(3)}/><ellipse cx="32" cy="44" rx="6" ry="10" fill="#fff" opacity=".5"/>`,
+  acorn: `<path d="M30 46 Q30 88 50 92 Q70 88 70 46 Z" fill="#D9A15A" ${st(4)}/>
+    <ellipse cx="42" cy="62" rx="5" ry="12" fill="#fff" opacity=".35"/>
+    <path d="M18 48 Q20 24 50 22 Q80 24 82 48 Q50 56 18 48 Z" fill="#8A5A2E" ${st(4)}/>
+    <path d="M30 34 l8 8 M42 28 l8 10 M56 28 l8 10 M68 34 l6 8" stroke="#5E3A1A" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M50 22 Q50 12 58 8" fill="none" stroke="#5E3A1A" stroke-width="5" stroke-linecap="round"/>`,
   bamboo: `<g ${st(4)}><rect x="38" y="6" width="22" height="90" rx="8" fill="#8CE99A"/></g>
     <path d="M38 34 H60 M38 64 H60" stroke="${OL}" stroke-width="4"/>
     <path d="M60 30 Q84 18 92 28 Q78 36 60 30 Z M38 58 Q14 46 8 56 Q22 64 38 58 Z" fill="#51CF66" ${st(3)}/>`,

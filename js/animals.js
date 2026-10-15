@@ -8,7 +8,7 @@ export const ANIMALS = {
   bunny:    { name: 'bunny',    plural: 'bunnies',   sound: 'Sniff sniff!' },
   bear:     { name: 'bear',     plural: 'bears',     sound: 'Grrr!' },
   frog:     { name: 'froggy',   plural: 'froggies',  sound: 'Ribbit ribbit!' },
-  pig:      { name: 'piggy',    plural: 'piggies',   sound: 'Oink oink!' },
+  squirrel: { name: 'squirrel', plural: 'squirrels', sound: 'Chitter chitter!' },
   chick:    { name: 'chick',    plural: 'chicks',    sound: 'Cheep cheep!' },
   lion:     { name: 'lion',     plural: 'lions',     sound: 'Roar!' },
   cow:      { name: 'cow',      plural: 'cows',      sound: 'Moooo!' },

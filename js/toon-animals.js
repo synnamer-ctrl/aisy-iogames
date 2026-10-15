@@ -163,23 +163,42 @@ const BUILD = {
     ${mouth(K, 100, 92, 15, { tongue: false }).replace(/<path class="c-smile"[^>]*>/, '')}`;
   },
 
-  pig(K) {
-    const F = K.vol('#FFB6C4'), C = K.vol('#FFD3DC', { hi: 0.3, lo: -0.15 }), S = K.vol('#FF97AD', { hi: 0.3, lo: -0.3 });
-    const tail = `<g class="c-tail"><path d="M134 176 c 14 -2 18 -14 10 -18 c -8 -4 -12 6 -4 9 c 8 3 14 -4 14 -12" fill="none" stroke="#F08BA0" stroke-width="4" stroke-linecap="round"/></g>`;
-    return `${sitBody(K, F, C, { tail, paws: K.vol('#B5677C'), chest: false })}
+  squirrel(K) {
+    const F = K.vol('#C8743A'), C = K.vol('#FFF0DC', { hi: 0.3, lo: -0.18 }), T = K.vol('#D9874A', { hi: 0.4, lo: -0.3 });
+    const D = K.vol('#8E4A20');
+    const tail = `<g class="c-tail">
+      <ellipse cx="134" cy="172" rx="24" ry="20" fill="${T}"/>
+      <ellipse cx="156" cy="126" rx="30" ry="56" fill="${T}" transform="rotate(16 156 126)"/>
+      <ellipse cx="164" cy="62" rx="26" ry="30" fill="${T}" transform="rotate(-24 164 62)"/>
+      <ellipse cx="146" cy="38" rx="18" ry="16" fill="${T}"/>
+      ${K.spec(150, 110, 10, 32, 0.35, 16)}${K.spec(156, 48, 10, 9, 0.4)}
+      <path d="M166 150 q8 -14 4 -30 M150 90 q10 -10 8 -26" fill="none" stroke="#A85A26" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/></g>`;
+    return `${tail}
+    <ellipse cx="58" cy="192" rx="19" ry="7" fill="${D}"/><ellipse cx="142" cy="192" rx="19" ry="7" fill="${D}"/>
+    <ellipse cx="70" cy="172" rx="26" ry="24" fill="${F}"/><ellipse cx="130" cy="172" rx="26" ry="24" fill="${F}"/>
+    <path d="M100 98 C 76 98, 66 130, 66 160 C 66 186, 80 196, 100 196 C 120 196, 134 186, 134 160 C 134 130, 124 98, 100 98 Z" fill="${F}"/>
+    <ellipse cx="100" cy="152" rx="22" ry="32" fill="${C}"/>
+    ${K.ao(100, 108, 40, 13, 0.45)}
+    <g class="c-arm-l"><ellipse cx="86" cy="134" rx="8" ry="17" fill="${F}" transform="rotate(-32 86 134)"/></g>
+    <g class="c-arm-r"><ellipse cx="114" cy="134" rx="8" ry="17" fill="${F}" transform="rotate(32 114 134)"/></g>
+    <path d="M92 140 Q92 160 100 162 Q108 160 108 140 Z" fill="${K.vol('#D9A15A')}"/>
+    <path d="M89 141 Q90 132 100 131 Q110 132 111 141 Q100 145 89 141 Z" fill="${K.vol('#8A5A2E')}"/>
+    <ellipse cx="91" cy="144" rx="5" ry="4" fill="${F}"/><ellipse cx="109" cy="144" rx="5" ry="4" fill="${F}"/>
+    ${K.ao(100, 197, 50, 5, 0.35)}
     <g class="c-ears">
-      <path d="M64 40 C 56 24, 52 12, 54 6 C 66 8, 80 18, 90 30 Z" fill="${F}"/><path d="M64 34 C 60 24, 58 16, 60 12 C 68 14, 76 22, 82 30 Z" fill="${S}" opacity=".7"/>
-      <path d="M136 40 C 144 24, 148 12, 146 6 C 134 8, 120 18, 110 30 Z" fill="${F}"/><path d="M136 34 C 140 24, 142 16, 140 12 C 132 14, 124 22, 118 30 Z" fill="${S}" opacity=".7"/>
+      <path d="M70 42 C 62 26, 62 12, 68 2 C 78 8, 86 22, 88 34 Z" fill="${F}"/><path d="M72 36 C 68 26, 68 16, 70 10 C 76 16, 80 24, 82 32 Z" fill="${K.vol('#F2B8A0')}"/>
+      <path d="M130 42 C 138 26, 138 12, 132 2 C 122 8, 114 22, 112 34 Z" fill="${F}"/><path d="M128 36 C 132 26, 132 16, 130 10 C 124 16, 120 24, 118 32 Z" fill="${K.vol('#F2B8A0')}"/>
+      <path d="M68 2 l-3 -7 l6 4 Z M132 2 l3 -7 l-6 4 Z" fill="${D}"/>
     </g>
-    <ellipse cx="100" cy="64" rx="47" ry="43" fill="${F}"/>
-    ${K.spec(80, 38, 22, 12, 0.55)}${K.rim(146, 70, 5, 22, 0.3)}
-    ${eyes(K, 56, 21, { rx: 11, ry: 12, iris: '#6E5A8C', ir: 0.95 })}
-    <path d="M72 41 l-3 -4 M76 39 l-2 -5 M128 41 l3 -4 M124 39 l2 -5" stroke="#5A2A3A" stroke-width="1.6" stroke-linecap="round"/>
-    ${K.glow(68, 80, 11, 7, '#FF5A7A', 0.35)}${K.glow(132, 80, 11, 7, '#FF5A7A', 0.35)}
-    <ellipse cx="100" cy="80" rx="20" ry="14" fill="${S}"/>
-    ${K.spec(94, 74, 9, 4, 0.5, 0)}
-    <ellipse cx="93" cy="81" rx="3.6" ry="5.5" fill="#A8445E"/><ellipse cx="107" cy="81" rx="3.6" ry="5.5" fill="#A8445E"/>
-    ${mouth(K, 100, 99, 8)}`;
+    <ellipse cx="100" cy="64" rx="41" ry="37" fill="${F}"/>
+    ${K.spec(82, 40, 19, 10, 0.55)}${K.rim(140, 70, 5, 20, 0.3)}
+    <ellipse cx="87" cy="86" rx="16" ry="12" fill="${C}"/><ellipse cx="113" cy="86" rx="16" ry="12" fill="${C}"/>
+    ${eyes(K, 60, 18, { rx: 12, ry: 13.5, iris: '#4A2A16', ir: 0.95 })}
+    ${K.glow(68, 80, 9, 6, '#FF6F82', 0.4)}${K.glow(132, 80, 9, 6, '#FF6F82', 0.4)}
+    ${nose(K, 100, 78, 6, 4.2, '#5A2E1E')}
+    <path class="c-smile" d="M96.5 89 h7 v6 q0 1.5 -1.5 1.5 h-4 q-1.5 0 -1.5 -1.5 Z M100 89 v7.5" fill="#fff" stroke="#C9A88A" stroke-width=".8"/>
+    ${mouth(K, 100, 86, 6, { tongue: false })}
+    <path d="M84 84 L58 80 M84 88 L60 92 M116 84 L142 80 M116 88 L140 92" stroke="#fff" stroke-width="1.1" stroke-linecap="round" opacity=".85"/>`;
   },
 
   chick(K) {

@@ -63,7 +63,7 @@ function confetti(n = 70) {
 }
 
 async function celebrate(text) {
-  const kinds = ['bear', 'bunny', 'cat', 'dog', 'panda', 'frog', 'pig', 'lion', 'monkey', 'chick', 'elephant', 'cow'];
+  const kinds = ['bear', 'bunny', 'cat', 'dog', 'panda', 'frog', 'squirrel', 'lion', 'monkey', 'chick', 'elephant', 'cow'];
   const ov = h(`<div class="celebrate">
       <div class="cel-star">${starSvg()}</div>
       <div class="cel-friends">${[0, 1, 2].map(() => `<div class="cel-friend happy talk">${animal(pick(kinds))}</div>`).join('')}</div>
@@ -153,7 +153,8 @@ function showCredits() {
         <li>Kitten, puppy, cow, frog, chick: BigSoundBank.com by Joseph Sardin (CC0)</li>
         <li>Lion, elephant, chimpanzee: Mike Koenig, SoundBible.com (CC BY 3.0)</li>
         <li>Bear: U.S. Fish &amp; Wildlife Service via SoundBible.com (public domain)</li>
-        <li>Pig: "Pig grunt" by erdie, Wikimedia Commons (CC BY 3.0)</li>
+        <li>Squirrel: U.S. National Park Service via SoundBible.com (public domain)</li>
+        <li>Panda: "Giant panda twittering", Wikimedia Commons (public domain)</li>
         <li>Rabbit: "Rabbit oinks and squeaks" by kessir, Wikimedia Commons (CC0)</li>
       </ul>
       <p>Clips were trimmed and volume-levelled. Licences: CC0 and public domain need no credit; CC BY 3.0 = creativecommons.org/licenses/by/3.0</p>

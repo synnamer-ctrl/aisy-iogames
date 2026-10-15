@@ -28,6 +28,7 @@ export default {
       const others = sample(Object.values(FOOD_FOR).filter((f) => f !== want), 2);
       spot.innerHTML = `<div class="eater open">${animal(kind)}</div><div class="thought">${food(want)}</div>`;
       const eater = spot.querySelector('.eater');
+      eater.addEventListener('pointerdown', () => { if (!busy) { flash(eater, 'wiggle', 500); api.sound(kind); } });
       flash(eater, 'pop-in', 600);
       tray.innerHTML = '';
       dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < fed % 5 ? 'on' : ''}"></i>`).join('');

@@ -10,7 +10,7 @@ const KEYS = [
   { n: 'G4', color: '#22B8CF', kind: 'elephant' },
   { n: 'A4', color: '#3FA7F5', kind: 'bunny' },
   { n: 'B4', color: '#B57EDC', kind: 'monkey' },
-  { n: 'C5', color: '#FF8FC7', kind: 'pig' },
+  { n: 'C5', color: '#FF8FC7', kind: 'squirrel' },
 ];
 // [key index, beats]
 const SONGS = {

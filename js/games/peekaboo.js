@@ -18,6 +18,7 @@ export default {
     const who = root.querySelector('.who');
     const dots = root.querySelector('.dots');
     let found = 0, ready = false;
+    who.addEventListener('pointerdown', () => { const k = who.querySelector('svg')?.dataset.kind; if (k) { flash(who, 'wiggle', 500); api.sound(k); } });
 
     async function round() {
       ready = false;

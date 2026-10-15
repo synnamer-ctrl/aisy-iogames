@@ -94,7 +94,7 @@ export const sfx = {
 };
 
 /* ---------- real animal recordings (sounds/*.mp3) ---------- */
-export const SOUND_KINDS = ['cat', 'dog', 'bunny', 'bear', 'frog', 'pig', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'];
+export const SOUND_KINDS = ['cat', 'dog', 'bunny', 'bear', 'frog', 'squirrel', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'];
 const buffers = {};
 let loading = null;
 let playing = null;
