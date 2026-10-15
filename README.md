@@ -1,8 +1,8 @@
 # Aisy's Play Land 🐻🧱🎈
 
 A toddler game box (made for ages 3–4): **12 mini-games in one installable, offline PWA.**
-No ads, no reading needed. A friendly voice explains every game. The animals are realistic
-drawings of young animals (fur, natural colours) that still blink, look around, talk and wag,
+No ads, no reading needed. A friendly voice explains every game. The animals are soft 3D-style
+cartoon baby animals (smooth shading, glossy eyes, no outlines) that blink, look around, talk and wag,
 and they make **real recorded animal sounds** (see `sounds/CREDITS.md`).
 
 | # | Game | What your child practices |
@@ -28,7 +28,7 @@ and a big orange 🏠 button to go home. 🔊 toggles all sound.
 
 - Plain HTML/CSS/JS ES modules, no build step and no dependencies.
 - Every character is a hand-drawn SVG (`js/characters.js`) animated with CSS (`css/style.css`).
-- Animals are procedurally drawn SVG (`js/animals.js`): fur tufts, hair strokes, soft shading, species eyes.
+- Animals are SVG in a 3D-render cartoon style (`js/toon.js` shading kit, `js/toon-animals.js` drawings).
 - Real animal recordings live in `sounds/` (CC0 / public domain / CC BY, credited in-app via the ⓘ button).
 - Other sound effects are synthesized with WebAudio. The voice uses the device's built-in speech.
 - `sw.js` caches everything so it works fully offline once opened.
