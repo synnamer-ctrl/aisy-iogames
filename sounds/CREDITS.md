@@ -5,9 +5,9 @@ Real animal recordings, trimmed to the clearest call and volume-levelled.
 | File | Source | Author | Licence |
 |------|--------|--------|---------|
 | cat.mp3 | BigSoundBank #1890 "Meow Cat #2" | Joseph Sardin | CC0 |
-| dog.mp3 | BigSoundBank #0612 "Small dog barking" | Joseph Sardin | CC0 |
+| dog.mp3 | SoundBible "Labrador Barking Dog" | Daniel Simion | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) |
 | cow.mp3 | BigSoundBank #0546 "Cow Moos #1" | Joseph Sardin | CC0 |
-| frog.mp3 | BigSoundBank #0819 "One frog" | Joseph Sardin | CC0 |
+| frog.mp3 | SoundBible "Frog Croaking" | snottyboy | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) |
 | chick.mp3 | BigSoundBank #0672 "Chick that chirp" | Joseph Sardin | CC0 |
 | bunny.mp3 | Wikimedia Commons "Rabbit oinks and squeaks.wav" | kessir | CC0 |
 | squirrel.mp3 | SoundBible "Squirrel" | U.S. National Park Service | Public domain |

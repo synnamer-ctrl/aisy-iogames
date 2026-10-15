@@ -150,7 +150,9 @@ function showCredits() {
   const ov = h(`<div class="credits"><div class="credits-card">
       <h2>Animal sound credits</h2>
       <ul>
-        <li>Kitten, puppy, cow, frog, chick: BigSoundBank.com by Joseph Sardin (CC0)</li>
+        <li>Kitten, cow, chick: BigSoundBank.com by Joseph Sardin (CC0)</li>
+        <li>Puppy: "Labrador Barking Dog" by Daniel Simion, SoundBible.com (CC BY 3.0)</li>
+        <li>Frog: "Frog Croaking" by snottyboy, SoundBible.com (CC BY 3.0)</li>
         <li>Lion, elephant, chimpanzee: Mike Koenig, SoundBible.com (CC BY 3.0)</li>
         <li>Bear: U.S. Fish &amp; Wildlife Service via SoundBible.com (public domain)</li>
         <li>Squirrel: U.S. National Park Service via SoundBible.com (public domain)</li>
