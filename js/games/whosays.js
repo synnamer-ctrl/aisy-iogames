@@ -1,11 +1,12 @@
 import { animal, ANIMALS, ANIMAL_KINDS } from '../characters.js';
 import { h, pick, sample, shuffle, flash } from '../util.js';
+import { playableKinds } from '../audio.js';
 
 export default {
   id: 'whosays',
   title: 'Who Says That?',
   color: '#38D9A9',
-  icon: () => `<div class="icon-whosays">${animal('lion')}<span>?</span></div>`,
+  icon: () => `<div class="icon-whosays">${animal('giraffe')}<span>?</span></div>`,
   start(stage, api) {
     const root = h(`<div class="g-whosays">
         <button class="listen" aria-label="Play the sound again">🔊</button>
@@ -28,7 +29,8 @@ export default {
 
     async function round() {
       busy = true;
-      do target = pick(ANIMAL_KINDS); while (target === last);
+      // only animals with a real recording can be the mystery voice
+      do target = pick(playableKinds()); while (target === last);
       last = target;
       const n = right < 5 ? 3 : 4;
       const set = shuffle([target, ...sample(ANIMAL_KINDS.filter((k) => k !== target), n - 1)]);

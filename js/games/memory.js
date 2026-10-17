@@ -5,7 +5,7 @@ export default {
   id: 'memory',
   title: 'Match Pairs',
   color: '#F783AC',
-  icon: () => `<div class="icon-memory"><div class="mc back">★</div><div class="mc">${animal('squirrel')}</div></div>`,
+  icon: () => `<div class="icon-memory"><div class="mc back">★</div><div class="mc">${animal('hippo')}</div></div>`,
   start(stage, api) {
     const root = h(`<div class="g-memory"><div class="cards"></div></div>`);
     stage.appendChild(root);

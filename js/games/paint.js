@@ -1,10 +1,9 @@
 import { h, flash } from '../util.js';
-import { PAGES } from './paint-pages.js';
 
 // Free-hand painting that never goes outside the lines: a stroke belongs to
 // the paint area it started in and is clipped to that area's shape. Areas are
-// stacked in page order (later ones cover earlier ones, like the drawing), and
-// the black outlines are drawn over all the paint.
+// stacked in page order (later ones cover earlier ones, like the drawing), each
+// with its outline just above its paint; eyes and other details go on top.
 
 const NS = 'http://www.w3.org/2000/svg';
 const COLORS = ['#FF5A5F', '#FF922B', '#FFD43B', '#51CF66', '#3FA7F5', '#B57EDC', '#FF8FC7', '#8B5A2B', '#74C0FC', '#2B2B2B'];
@@ -13,6 +12,8 @@ const ERASER = '#FFFFFF';
 const SIZES = [9, 18, 30];
 const OUTLINE_ATTRS = ['stroke', 'stroke-width', 'stroke-linejoin', 'stroke-linecap'];
 
+// The colouring pages are big (vector art), so they load the first time Paint opens.
+let PAGES = null;
 // Strokes per page survive switching pictures (and leaving the game) until reload.
 const saved = new Map();
 let lastPage = 0;
@@ -82,8 +83,10 @@ export default {
 
     // Wiping needs two taps so a stray tap never erases a drawing.
     const fresh = root.querySelector('.fresh');
-    let armed = 0;
+    let armed = 0, disarm = 0;
     fresh.addEventListener('click', () => {
+      if (!PAGES) return;
+      clearTimeout(disarm);
       if (Date.now() - armed < 2000) {
         armed = 0;
         fresh.classList.remove('armed');
@@ -94,20 +97,27 @@ export default {
         armed = Date.now();
         fresh.classList.add('armed');
         flash(fresh, 'wiggle', 500);
-        setTimeout(() => fresh.classList.remove('armed'), 2000);
+        disarm = setTimeout(() => { armed = 0; fresh.classList.remove('armed'); }, 2000);
       }
     });
 
     /* ---------- picture gallery ---------- */
+    let thumbs = null;
     root.querySelector('.pics').addEventListener('click', () => {
+      if (!PAGES) return;
       api.sfx.whoosh();
-      grid.innerHTML = '';
-      PAGES.forEach((p, i) => {
-        const t = h(`<button class="thumb ${i === page ? 'cur' : ''}" aria-label="${p.name}">
-            <svg viewBox="0 0 400 300">${p.svg}</svg>${saved.get(i)?.length ? '<span class="done">⭐</span>' : ''}</button>`);
-        t.querySelectorAll('.rg').forEach((r) => r.setAttribute('fill', '#fff'));
-        t.addEventListener('click', () => { gallery.hidden = true; api.sfx.tap(); load(i); });
-        grid.appendChild(t);
+      if (!thumbs) {
+        thumbs = PAGES.map((p, i) => {
+          const t = h(`<button class="thumb" aria-label="${p.name}"><svg viewBox="0 0 400 300">${p.svg}</svg><span class="done">⭐</span></button>`);
+          t.querySelectorAll('.rg').forEach((r) => r.setAttribute('fill', '#fff'));
+          t.addEventListener('click', () => { gallery.hidden = true; api.sfx.tap(); load(i); });
+          grid.appendChild(t);
+          return t;
+        });
+      }
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('cur', i === page);
+        t.querySelector('.done').hidden = !saved.get(i)?.length;
       });
       gallery.hidden = false;
     });
@@ -145,11 +155,14 @@ export default {
         const paint = el('g', { 'clip-path': `url(#${clipId})`, 'pointer-events': 'none' });
         art.append(area, paint);
         layers.push(paint);
+        // Each outline sits right above its own paint, so things in front
+        // (an animal) cover the lines of things behind (a hill).
         if (hasLine) {
           const line = document.importNode(node, true);
           line.removeAttribute('class');
           line.setAttribute('fill', 'none');
-          top.appendChild(line);
+          line.setAttribute('pointer-events', 'none');
+          art.appendChild(line);
         }
         n++;
       }
@@ -178,16 +191,16 @@ export default {
       const q = pt.matrixTransform(svg.getScreenCTM().inverse());
       return [Math.round(q.x * 10) / 10, Math.round(q.y * 10) / 10];
     };
-    const nextColor = () => {
-      if (color !== RAINBOW) return color;
+    const nextColor = (rainbow) => {
+      if (!rainbow) return color;
       hue = (hue + 28) % 360;
       return `hsl(${hue} 90% 58%)`;
     };
 
     /* ---------- drawing ---------- */
-    function begin(r, pts) {
-      const s = { r, c: nextColor(), w: SIZES[size], d: strokePath(pts) };
-      return { s, pts, path: addPath(s) };
+    function begin(r, pts, rainbow = color === RAINBOW) {
+      const s = { r, c: nextColor(rainbow), w: SIZES[size], d: strokePath(pts) };
+      return { s, pts, rainbow, path: addPath(s) };
     }
     function down(e) {
       const area = e.target.closest?.('[data-r]');
@@ -205,9 +218,9 @@ export default {
       if (Math.hypot(p[0] - lx, p[1] - ly) < 1.5) return;
       cur.pts.push(p);
       // The rainbow brush changes colour as it goes: start a new segment every few points.
-      if (color === RAINBOW && cur.pts.length > 7) {
+      if (cur.rainbow && cur.pts.length > 7) {
         finish(cur);
-        live.set(e.pointerId, begin(cur.s.r, cur.pts.slice(-2)));
+        live.set(e.pointerId, begin(cur.s.r, cur.pts.slice(-2), true));
         return;
       }
       cur.s.d = strokePath(cur.pts);
@@ -233,6 +246,10 @@ export default {
       }
     }
 
-    load(page);
+    import('./paint-pages.js').then((m) => {
+      if (!root.isConnected) return; // left the game while loading
+      PAGES = m.PAGES;
+      load(Math.min(page, PAGES.length - 1));
+    });
   },
 };

@@ -5,10 +5,9 @@ export default {
   id: 'bubbles',
   title: 'Bubble Pop',
   color: '#5BC0EB',
-  icon: () => `<div class="icon-bubble">${animal('frog')}</div>`,
+  icon: () => `<div class="icon-bubble">${animal('penguin')}</div>`,
   start(stage, api) {
     const root = h(`<div class="g-bubbles">
-        <div class="seaweed s1"></div><div class="seaweed s2"></div><div class="seaweed s3"></div>
         <div class="pop-count"></div>
       </div>`);
     stage.appendChild(root);

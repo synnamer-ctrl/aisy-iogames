@@ -1,17 +1,39 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v12';
+const VERSION = 'aisy-v16';
+const ANIMALS = ['elephant', 'giraffe', 'hippo', 'monkey', 'panda', 'parrot', 'penguin', 'pig', 'bunny', 'snake'];
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
-  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/toon.js', 'js/toon-animals.js', 'js/characters.js', 'js/util.js',
+  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/characters.js', 'js/util.js',
   'js/games/index.js', 'js/games/bubbles.js', 'js/games/feed.js', 'js/games/colors.js',
   'js/games/counting.js', 'js/games/shapes.js', 'js/games/peekaboo.js', 'js/games/tower.js',
   'js/games/memory.js', 'js/games/piano.js', 'js/games/paint.js', 'js/games/paint-pages.js', 'js/games/sounds.js', 'js/games/whosays.js',
-  ...['cat', 'dog', 'bunny', 'bear', 'frog', 'squirrel', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'].map((k) => `sounds/${k}.mp3`),
+  ...['elephant', 'monkey', 'panda', 'parrot', 'pig', 'bunny', 'snake'].map((k) => `sounds/${k}.mp3`),
+  ...ANIMALS.map((k) => `img/kenney/animals/${k}.png`),
+  ...['red', 'blue', 'yellow', 'green', 'purple', 'pink'].flatMap((c) => ['square', 'circle', 'rhombus', 'squircle'].map((b) => `img/kenney/shapes/${c}_${b}.png`)),
+  'img/kenney/shapes/red_triangle.png', 'img/kenney/faces/face_a.png',
+  ...['bubble.png', 'bush.png', 'star-coin.png', 'cloud1.png', 'moon_half.png', 'symbol_01.png', 'symbol_02.png', 'star_06.png', 'star_07.png',
+    'castle.webp', 'talltrees.webp', 'forest.webp', 'sky.webp'].map((f) => `img/kenney/scene/${f}`),
+  ...['carrot', 'banana', 'bamboo', 'fish', 'apple', 'corn'].map((k) => `img/food/${k}.webp`),
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png',
 ];
 
+// Fill the new cache; a file the network can't deliver right now is carried
+// over from the previous cache, so a flaky update never loses offline files.
+// If a file is in neither, the install fails and the old version keeps working.
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(VERSION).then((c) => Promise.all(ASSETS.map((a) => c.add(a).catch(() => {})))).then(() => self.skipWaiting()));
+  e.waitUntil((async () => {
+    const c = await caches.open(VERSION);
+    await Promise.all(ASSETS.map(async (a) => {
+      try {
+        await c.add(new Request(a, { cache: 'reload' }));
+      } catch {
+        const old = await caches.match(a, { ignoreSearch: true });
+        if (!old) throw new Error(`could not cache ${a}`);
+        await c.put(a, old);
+      }
+    }));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', (e) => {
@@ -39,6 +61,6 @@ self.addEventListener('fetch', (e) => {
     caches.match(req, { ignoreSearch: true }).then((hit) => hit || fetch(req).then((res) => {
       if (res.ok) { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); }
       return res;
-    }).catch(() => caches.match('index.html'))),
+    }).catch(() => (req.mode === 'navigate' ? caches.match('index.html') : Response.error()))),
   );
 });

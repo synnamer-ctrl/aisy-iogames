@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    id="svg2"
+    sodipodi:docname="whale.svg"
+    viewBox="0 0 155.99 77.1"
+    sodipodi:version="0.32"
+    version="1.0"
+    inkscape:output_extension="org.inkscape.output.svg.inkscape"
+    inkscape:version="0.46"
+  >
+  <defs
+      id="defs4"
+    >
+    <linearGradient
+        id="linearGradient3328"
+        y2="525.71"
+        gradientUnits="userSpaceOnUse"
+        x2="249"
+        gradientTransform="matrix(-1 0 0 1 566.73 48.118)"
+        y1="461.84"
+        x1="249"
+        inkscape:collect="always"
+      >
+      <stop
+          id="stop3289"
+          style="stop-color:#e1e1e1"
+          offset="0"
+      />
+      <stop
+          id="stop3291"
+          style="stop-color:#c7c7c7"
+          offset="1"
+      />
+    </linearGradient
+    >
+  </defs
+  >
+  <sodipodi:namedview
+      id="base"
+      bordercolor="#666666"
+      inkscape:pageshadow="2"
+      guidetolerance="10"
+      pagecolor="#ffffff"
+      gridtolerance="10000"
+      inkscape:window-height="976"
+      inkscape:zoom="2.8284271"
+      objecttolerance="10"
+      showgrid="false"
+      borderopacity="1.0"
+      inkscape:current-layer="g3315"
+      inkscape:cx="104.5"
+      inkscape:cy="87.321771"
+      inkscape:window-y="27"
+      inkscape:window-x="0"
+      inkscape:window-width="1280"
+      inkscape:object-paths="false"
+      inkscape:pageopacity="0"
+      inkscape:document-units="px"
+    >
+    <inkscape:grid
+        id="grid2383"
+        spacingx="25px"
+        enabled="true"
+        spacingy="25px"
+        visible="true"
+        type="xygrid"
+    />
+  </sodipodi:namedview
+  >
+  <g
+      id="layer1"
+      inkscape:label="Layer 1"
+      inkscape:groupmode="layer"
+      transform="translate(-212.23 -503.19)"
+    >
+    <g
+        id="g3315"
+        transform="matrix(1.1464 0 0 1.1464 -42.499 -79.329)"
+      >
+      <path
+          id="path3212"
+          sodipodi:nodetypes="ccssscccccc"
+          style="fill-rule:evenodd;fill:url(#linearGradient3328)"
+          d="m343.65 566.1c8.39 0 11.58-11.25 11.58-11.25s11.57-44.99-34.73-44.99c-34.73 0-55 48.66-77.54 43.34-6.83-1.61 11.66-14.95 11.66-14.95s-16.68-2.41-21.27 1.63c2.69-11.94-4.62-24.03-4.62-24.03s-20.73 50.25 23.98 50.25h36.31s-3.49 16.92 25.81 0h28.82z"
+      />
+      <path
+          id="path3303"
+          d="m42.603 79.147c1.566 3.203-11.249 8.349-7.071 16.264-9.054-0.524-18.606-3.784-14.197-33.859 0.321-2.174 2.111 20.719 2.353 18.302 0.299-2.99 18.354-1.855 18.915-0.707z"
+          sodipodi:nodetypes="ccsss"
+          style="fill-rule:evenodd;fill:#000000;fill-opacity:.17794"
+          transform="translate(208.22 459.74)"
+      />
+      <path
+          id="path2389"
+          sodipodi:rx="12.5"
+          sodipodi:ry="12.5"
+          style="fill:#000000"
+          sodipodi:type="arc"
+          d="m200 489.86a12.5 12.5 0 1 1 -25 0 12.5 12.5 0 1 1 25 0z"
+          transform="matrix(-.46305 0 0 .44996 410.15 328.37)"
+          sodipodi:cy="489.86218"
+          sodipodi:cx="187.5"
+      />
+      <path
+          id="path3199"
+          sodipodi:nodetypes="ccssscccccc"
+          style="fill:none"
+          d="m343.65 566.1c8.39 0 11.58-11.25 11.58-11.25s11.57-44.99-34.73-44.99c-34.73 0-55 48.66-77.54 43.34-6.83-1.61 11.66-14.95 11.66-14.95s-16.68-2.41-21.27 1.63c-0.05-11.76-4.62-24.03-4.62-24.03s-20.73 50.25 23.98 50.25h36.31s-3.49 16.92 25.81 0h28.82z"
+      />
+      <path
+          id="path3254"
+          sodipodi:rx="5.875"
+          sodipodi:ry="5.375"
+          style="fill:#ffffff;fill-opacity:.39216"
+          sodipodi:type="arc"
+          d="m206.25 512.49a5.875 5.375 0 1 1 -11.75 0 5.875 5.375 0 1 1 11.75 0z"
+          transform="matrix(-.46305 0 0 .35578 416.06 364.88)"
+          sodipodi:cy="512.48718"
+          sodipodi:cx="200.375"
+      />
+      <path
+          id="path3271"
+          sodipodi:nodetypes="ccssscccccc"
+          style="fill:none"
+          d="m343.65 566.1c8.39 0 11.58-11.25 11.58-11.25s11.57-44.99-34.73-44.99c-34.73 0-55 48.66-77.54 43.34-6.83-1.61 11.66-14.95 11.66-14.95s-16.68-2.41-21.27 1.63c2.69-11.94-4.62-24.03-4.62-24.03s-20.73 50.25 23.98 50.25h36.31s-3.49 16.92 25.81 0h28.82z"
+      />
+      <path
+          id="path3273"
+          sodipodi:rx="12.5"
+          sodipodi:ry="12.5"
+          style="fill:none"
+          sodipodi:type="arc"
+          d="m200 489.86a12.5 12.5 0 1 1 -25 0 12.5 12.5 0 1 1 25 0z"
+          transform="matrix(-.46305 0 0 .44996 410.15 328.37)"
+          sodipodi:cy="489.86218"
+          sodipodi:cx="187.5"
+      />
+      <path
+          id="path3275"
+          sodipodi:nodetypes="ccssscccccc"
+          style="stroke-linejoin:round;stroke:#000000;stroke-linecap:round;stroke-width:3.4891;fill:none"
+          d="m343.65 566.1c8.39 0 11.58-11.25 11.58-11.25s11.57-44.99-34.73-44.99c-34.73 0-55 48.66-77.54 43.34-6.83-1.61 11.66-14.95 11.66-14.95s-16.68-2.41-21.27 1.63c-0.05-11.76-4.62-24.03-4.62-24.03s-20.73 50.25 23.98 50.25h36.31s-3.49 16.92 25.81 0h28.82z"
+      />
+      <path
+          id="path3277"
+          sodipodi:rx="5.875"
+          sodipodi:ry="5.375"
+          style="fill:none"
+          sodipodi:type="arc"
+          d="m206.25 512.49a5.875 5.375 0 1 1 -11.75 0 5.875 5.375 0 1 1 11.75 0z"
+          transform="matrix(-.46305 0 0 .35578 416.06 364.88)"
+          sodipodi:cy="512.48718"
+          sodipodi:cx="200.375"
+      />
+      <path
+          id="path3299"
+          d="m137 69.25c2.79-7.109-12.86-16.468-29-13.5-17.843 3.281-35.786 21.574-36.5 25-1.25 6 16.131-12.872 36-15.75 22.35-3.237 28.5 6.797 29.5 4.25z"
+          sodipodi:nodetypes="cssss"
+          style="fill-rule:evenodd;fill:#ffffff;fill-opacity:.75"
+          transform="translate(208.22 459.74)"
+      />
+      <path
+          id="path3301"
+          d="m85.25 102.12c-3.587 10.99 11.568 5.25 15.13 1.26 4.13-4.656-13.217-7.113-15.13-1.26z"
+          sodipodi:nodetypes="css"
+          style="fill-rule:evenodd;fill:#ffffff"
+          transform="translate(208.22 459.74)"
+      />
+    </g
+    >
+  </g
+  >
+  <metadata
+    >
+    <rdf:RDF
+      >
+      <cc:Work
+        >
+        <dc:format
+          >image/svg+xml</dc:format
+        >
+        <dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        />
+        <cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        />
+        <dc:publisher
+          >
+          <cc:Agent
+              rdf:about="http://openclipart.org/"
+            >
+            <dc:title
+              >Openclipart</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:publisher
+        >
+        <dc:title
+          >Small whale</dc:title
+        >
+        <dc:date
+          >2008-08-31T13:45:58</dc:date
+        >
+        <dc:description
+          >Small whale I made for a logo.</dc:description
+        >
+        <dc:source
+          >https://openclipart.org/detail/18925/small-whale-by-lemmling</dc:source
+        >
+        <dc:creator
+          >
+          <cc:Agent
+            >
+            <dc:title
+              >lemmling</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:creator
+        >
+        <dc:subject
+          >
+          <rdf:Bag
+            >
+            <rdf:li
+              >animal</rdf:li
+            >
+            <rdf:li
+              >cartoon</rdf:li
+            >
+            <rdf:li
+              >mammal</rdf:li
+            >
+            <rdf:li
+              >whale</rdf:li
+            >
+          </rdf:Bag
+          >
+        </dc:subject
+        >
+      </cc:Work
+      >
+      <cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        >
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        />
+      </cc:License
+      >
+    </rdf:RDF
+    >
+  </metadata
+  >
+</svg
+>

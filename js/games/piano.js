@@ -3,14 +3,14 @@ import { NOTE } from '../audio.js';
 import { h, flash } from '../util.js';
 
 const KEYS = [
-  { n: 'C4', color: '#FF5A5F', kind: 'cat' },
-  { n: 'D4', color: '#FF922B', kind: 'dog' },
-  { n: 'E4', color: '#FFD43B', kind: 'chick' },
-  { n: 'F4', color: '#51CF66', kind: 'frog' },
+  { n: 'C4', color: '#DE5A72', kind: 'parrot' },
+  { n: 'D4', color: '#FF922B', kind: 'monkey' },
+  { n: 'E4', color: '#FDC249', kind: 'giraffe' },
+  { n: 'F4', color: '#6BC785', kind: 'snake' },
   { n: 'G4', color: '#22B8CF', kind: 'elephant' },
-  { n: 'A4', color: '#3FA7F5', kind: 'bunny' },
-  { n: 'B4', color: '#B57EDC', kind: 'monkey' },
-  { n: 'C5', color: '#FF8FC7', kind: 'squirrel' },
+  { n: 'A4', color: '#779CEA', kind: 'hippo' },
+  { n: 'B4', color: '#9C68E7', kind: 'penguin' },
+  { n: 'C5', color: '#FF8FD7', kind: 'pig' },
 ];
 // Songs as [key index, beats]. Keys: 0=C 1=D 2=E 3=F 4=G 5=A 6=B 7=high C.
 const T = 1 / 3;
