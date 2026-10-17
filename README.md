@@ -17,7 +17,7 @@ and they make **real recorded animal sounds** (see `sounds/CREDITS.md`).
 | 6 | **Peekaboo** – friends hide behind bushes, find the one asked for | memory, object permanence |
 | 7 | **Blox Tower** – tap to drop blocks, build tall, then CRASH! | timing, cause & effect |
 | 8 | **Match Pairs** – flip cards to find two the same (2 → 4 pairs) | memory |
-| 9 | **Animal Piano** – 8 singing animal keys + ⭐ 🐑 🔔 songs | music, cause & effect |
+| 9 | **Animal Piano** – 8 singing animal keys: tap them or slide a finger across; 8 songs to play along | music, cause & effect |
 | 10 | **Paint** – draw free-hand with a finger on 20 colouring pictures; paint never goes outside the lines | colours, creativity, fine motor |
 
 Toddler-friendly by design: huge touch targets, no failure states (wrong answers just get a gentle
