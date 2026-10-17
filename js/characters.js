@@ -7,6 +7,7 @@ const st = (w = 4.5) => `stroke="${OL}" stroke-width="${w}" stroke-linejoin="rou
 const delay = () => (Math.random() * -5).toFixed(2);
 
 export { ANIMALS, ANIMAL_KINDS, animal } from './animals.js';
+import { kit, mix, eyes as tEyes, mouth as tMouth } from './toon.js';
 
 /* ---------- shared face parts ---------- */
 function eyes(cy = 86, dx = 21, r = 1) {
@@ -37,17 +38,64 @@ export const COLORS = {
 };
 export const COLOR_NAMES = Object.keys(COLORS);
 
-export function blox(color, cls = '') {
+// Blox: glossy toy-brick buddies in the same soft 3D style as the animals.
+// Shapes: cube, brick (long), tall (pillar), round (drum). Studs stick up
+// above y=0 and tuck under whatever is stacked on top.
+export const BLOX_SHAPES = {
+  cube:  { w: 180, h: 170, studs: 2, eye: 1 },
+  brick: { w: 300, h: 140, studs: 3, eye: 0.95 },
+  tall:  { w: 130, h: 230, studs: 1, eye: 0.85 },
+  round: { w: 180, h: 160, studs: 0, eye: 1 },
+};
+export const BLOX_PAD = 10, BLOX_STUD = 26;
+export function blox(color, cls = '', shape = 'cube') {
   const k = COLORS[color] || { c: color, d: color };
-  return `<svg class="char blox ${cls}" viewBox="0 -10 200 210" style="--d:${delay()}s"><g class="c-bob">
-    <rect x="40" y="-4" width="36" height="22" rx="7" fill="${k.c}" ${st()}/>
-    <rect x="124" y="-4" width="36" height="22" rx="7" fill="${k.c}" ${st()}/>
-    <rect x="14" y="12" width="172" height="176" rx="30" fill="${k.d}"/>
-    <rect x="14" y="12" width="172" height="158" rx="30" fill="${k.c}"/>
-    <rect x="14" y="12" width="172" height="176" rx="30" fill="none" ${st(5)}/>
-    <path d="M38 64 Q38 36 66 36 L96 36" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".55" fill="none"/>
-    ${eyes(88, 32, 1.3)}${cheeks(124, 54)}
-    ${mouth(126, 16)}
+  const S = BLOX_SHAPES[shape];
+  const K = kit();
+  const { w, h } = S, x0 = BLOX_PAD, cx = x0 + w / 2;
+  const body = K.vol(k.c, { hi: 0.42, lo: -0.28, fx: 0.28, fy: 0.18, r: 0.95 });
+  const side = K.lin([[0, mix(k.c, 0.25)], [1, mix(k.c, -0.25)]], 0, 0, 1, 0);
+  const lip = K.lin([[0, mix(k.c, 0.45)], [1, k.c]]);
+  let studs = '';
+  for (let i = 0; i < S.studs; i++) {
+    const sx = x0 + (w / S.studs) * (i + 0.5);
+    studs += `<rect x="${sx - 22}" y="-18" width="44" height="26" rx="6" fill="${side}"/>
+      <ellipse cx="${sx}" cy="-18" rx="22" ry="8" fill="${lip}"/>
+      <ellipse cx="${sx - 7}" cy="-20" rx="8" ry="3" fill="#fff" opacity=".55"/>`;
+  }
+  const shell = S.studs === 0
+    ? `<rect x="${x0}" y="10" width="${w}" height="${h - 10}" rx="34" fill="${body}"/>
+       <ellipse cx="${cx}" cy="18" rx="${w / 2}" ry="18" fill="${lip}"/>
+       <ellipse cx="${cx}" cy="18" rx="${w / 2 - 14}" ry="10" fill="${mix(k.c, 0.15)}" opacity=".8"/>`
+    : `<rect x="${x0}" y="0" width="${w}" height="${h}" rx="28" fill="${body}"/>
+       <rect x="${x0 + 4}" y="2" width="${w - 8}" height="20" rx="10" fill="${lip}" opacity=".9"/>`;
+  const s = S.eye, faceY = h * 0.48;
+  const dx = Math.min(38, w * 0.22) * s;
+  return `<svg class="char blox ${cls}" data-shape="${shape}" viewBox="0 ${-BLOX_STUD} ${w + BLOX_PAD * 2} ${h + BLOX_STUD}" style="--d:${delay()}s"><defs>${K.defs.join('')}</defs><g class="c-bob">
+    ${studs}${shell}
+    ${K.glow(cx, h - 6, w / 2, 14, '#000', 0.22)}
+    ${K.spec(x0 + w * 0.26, h * 0.24, w * 0.16, h * 0.09, 0.6, -15)}
+    <g transform="translate(${cx - 100} 0)">
+      ${tEyes(K, faceY, dx, { rx: 20 * s, ry: 22 * s, iris: '#4A2E1F', ir: 0.92 })}
+      ${K.glow(100 - dx - 16 * s, faceY + 28 * s, 15 * s, 9 * s, '#FF5A7A', 0.5)}${K.glow(100 + dx + 16 * s, faceY + 28 * s, 15 * s, 9 * s, '#FF5A7A', 0.5)}
+      ${tMouth(K, 100, faceY + 32 * s, 17 * s)}
+    </g>
+  </g></svg>`;
+}
+
+// Golden star that crowns a finished tower.
+export function crown(cls = '') {
+  const K = kit();
+  const gold = K.vol('#FFD43B', { hi: 0.5, lo: -0.3 });
+  let d = '';
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 ? 40 : 92, t = -Math.PI / 2 + (i * Math.PI) / 5;
+    d += `${i ? 'L' : 'M'}${(100 + Math.cos(t) * r).toFixed(1)} ${(100 + Math.sin(t) * r).toFixed(1)} `;
+  }
+  return `<svg class="char crown ${cls}" viewBox="0 0 200 190" style="--d:${delay()}s"><defs>${K.defs.join('')}</defs><g class="c-bob">
+    <path d="${d}Z" fill="${gold}" stroke="#E8A400" stroke-width="5" stroke-linejoin="round"/>
+    ${K.spec(78, 70, 22, 12, 0.7, -20)}
+    <g transform="translate(0 10)">${tEyes(K, 92, 18, { rx: 11, ry: 12.5, iris: '#4A2E1F' })}${tMouth(K, 100, 116, 10)}</g>
   </g></svg>`;
 }
 

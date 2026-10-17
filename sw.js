@@ -1,5 +1,5 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v10';
+const VERSION = 'aisy-v11';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
   'js/app.js', 'js/audio.js', 'js/animals.js', 'js/toon.js', 'js/toon-animals.js', 'js/characters.js', 'js/util.js',

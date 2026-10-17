@@ -15,7 +15,7 @@ and they make **real recorded animal sounds** (see `sounds/CREDITS.md`).
 | 4 | **Count 1-2-3** – tap each animal and count out loud | counting 1–7 |
 | 5 | **Shapes** – put the shape in its hole on the sorter box | shapes, drag & drop |
 | 6 | **Peekaboo** – friends hide behind bushes, find the one asked for | memory, object permanence |
-| 7 | **Blox Tower** – tap to drop blocks, build tall, then CRASH! | timing, cause & effect |
+| 7 | **Blox Tower** – tap to drop glossy toy blocks (cubes, bricks, pillars, drums); levels of 5–15 blocks under day, sunset, night and space skies, crowned with a golden star | timing, cause & effect, counting |
 | 8 | **Match Pairs** – flip cards to find two the same (2 → 4 pairs) | memory |
 | 9 | **Animal Piano** – 8 singing animal keys: tap them or slide a finger across; 8 songs to play along | music, cause & effect |
 | 10 | **Paint** – draw free-hand with a finger on 20 colouring pictures; paint never goes outside the lines | colours, creativity, fine motor |

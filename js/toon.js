@@ -5,7 +5,7 @@
 
 let UID = 0;
 const r1 = (n) => Math.round(n * 10) / 10;
-function mix(hex, t) {
+export function mix(hex, t) {
   const n = parseInt(hex.slice(1), 16);
   const tgt = t > 0 ? 255 : 0, k = Math.abs(t);
   const ch = (v) => Math.round(v + (tgt - v) * k);
