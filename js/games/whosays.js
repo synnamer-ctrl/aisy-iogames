@@ -39,7 +39,7 @@ export default {
         b.addEventListener('pointerdown', () => choose(b, k));
         row.appendChild(b);
       });
-      await api.say('Listen! Who says this?');
+      await api.pause('Listen! Who says this?');
       busy = false; // answers count while the sound is still playing
       play();
     }
@@ -50,7 +50,7 @@ export default {
         busy = true;
         api.sfx.wrong();
         flash(b, 'no', 600);
-        await api.say(`That's the ${ANIMALS[k].name}. Listen again!`);
+        await api.pause(`That's the ${ANIMALS[k].name}. Listen again!`);
         busy = false;
         play();
         return;
@@ -61,7 +61,7 @@ export default {
       row.querySelectorAll('.who-pal:not(.chosen)').forEach((o) => o.classList.add('fade'));
       right++;
       dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < (right % 5 || 5) ? 'on' : ''}"></i>`).join('');
-      await api.say(`Yes! The ${ANIMALS[k].name}!`);
+      await api.pause(`Yes! The ${ANIMALS[k].name}!`);
       await api.sound(k);
       await api.wait(300);
       if (right % 5 === 0) await api.celebrate('You know all the animal sounds!');

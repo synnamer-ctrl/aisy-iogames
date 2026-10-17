@@ -85,6 +85,5 @@ export default {
       if (!token.stop) { b.classList.remove('on'); playingSong = null; api.sfx.success(); api.confetti(30); }
     }));
     api.onExit(stopSong);
-    api.say('Tap the animals to make music!');
   },
 };

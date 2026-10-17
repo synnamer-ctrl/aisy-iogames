@@ -43,7 +43,7 @@ export default {
           if (!over) return false;
           return drop(over.dataset.k === target ? over : null, over);
         },
-        onTap: () => { flash(piece, 'wiggle', 500); api.sfx.boing(); api.say(`Put the ${target} in its home!`); return false; },
+        onTap: () => { flash(piece, 'wiggle', 500); api.sfx.boing(); return false; },
       });
 
       function drop(good, el) {
@@ -51,7 +51,6 @@ export default {
         if (!good) {
           api.sfx.wrong();
           flash(el, 'no', 600);
-          api.say(`Oops! That's the ${el.dataset.k}. Find the ${target}!`);
           return false;
         }
         busy = true;
@@ -64,14 +63,13 @@ export default {
           done++;
           dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < (done % 5 || 5) ? 'on' : ''}"></i>`).join('');
           api.sfx.success();
-          await api.say(`${SHAPES[target].name[0].toUpperCase() + SHAPES[target].name.slice(1)}! ${api.praise()}`);
+          await api.pause(`${SHAPES[target].name[0].toUpperCase() + SHAPES[target].name.slice(1)}! ${api.praise()}`);
           await api.wait(300);
           if (done % 5 === 0) await api.celebrate('Shape master! Hooray!');
           round();
         });
         return true;
       }
-      api.say(`Where does the ${target} go?`);
     }
     round();
   },

@@ -37,7 +37,6 @@ export default {
         b.addEventListener('pointerdown', () => tap(b, c, target));
         row.appendChild(b);
       });
-      api.say(`Find ${target}! Where is ${target}?`);
     }
 
     async function tap(b, c, target) {
@@ -45,7 +44,6 @@ export default {
       if (c !== target) {
         api.sfx.wrong();
         flash(b, 'no', 600);
-        api.say(`That's ${c}. Find ${target}!`);
         return;
       }
       busy = true;
@@ -54,7 +52,7 @@ export default {
       row.querySelectorAll('.blox-btn:not(.chosen)').forEach((o) => o.classList.add('fade'));
       right++;
       dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < (right % 5 || 5) ? 'on' : ''}"></i>`).join('');
-      await api.say(`${cap(target)}! ${api.praise()}`);
+      await api.pause(`${cap(target)}! ${api.praise()}`);
       await api.wait(300);
       if (right % 5 === 0) await api.celebrate('You know your colors! Super!');
       round();

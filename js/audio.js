@@ -1,5 +1,5 @@
 // Sound effects are synthesized with WebAudio (no files to download, works
-// offline). Voice prompts use the device's built-in speech synthesis.
+// offline). Animals use real recordings from sounds/. There is no spoken voice.
 
 let ctx = null;
 let master = null;
@@ -10,7 +10,7 @@ export function isMuted() { return muted; }
 export function setMuted(v) {
   muted = v;
   try { localStorage.setItem('aisy-muted', v ? '1' : '0'); } catch { /* ignore */ }
-  if (v) { stopSpeech(); stopAnimalSound(); }
+  if (v) stopAnimalSound();
 }
 
 // iOS suspends/interrupts audio when the app goes to the background; wake it on the next touch.
@@ -29,12 +29,6 @@ export function unlockAudio() {
   }
   if (ctx.state === 'suspended') ctx.resume();
   preloadAnimalSounds();
-  // Prime speech on iOS: it must start inside a user gesture once.
-  if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(' ');
-    u.volume = 0;
-    speechSynthesis.speak(u);
-  }
 }
 
 function tone({ type = 'sine', from, to = from, dur = 0.2, vol = 0.5, at = 0, attack = 0.01 }) {
@@ -112,7 +106,7 @@ export function preloadAnimalSounds() {
       if (!res.ok) return;
       const data = await res.arrayBuffer();
       buffers[k] = await new Promise((ok, bad) => ctx.decodeAudioData(data, ok, bad));
-    } catch { /* missing or undecodable: callers fall back to speech */ }
+    } catch { /* missing or undecodable: that animal stays quiet */ }
   }));
   return loading;
 }
@@ -137,43 +131,4 @@ export async function animalSound(kind) {
   playing = src;
   src.start();
   return new Promise((r) => { src.onended = () => r(true); setTimeout(() => r(true), buf.duration * 1000 + 300); });
-}
-
-/* ---------- speech ---------- */
-let voice = null;
-function pickVoice() {
-  if (!('speechSynthesis' in window)) return;
-  const vs = speechSynthesis.getVoices().filter((v) => /^en/i.test(v.lang));
-  const pref = ['Samantha', 'Karen', 'Moira', 'Tessa', 'Google US English', 'Google UK English Female', 'Microsoft Aria', 'Microsoft Jenny', 'Microsoft Zira'];
-  voice = pref.map((n) => vs.find((v) => v.name.includes(n))).find(Boolean) || vs.find((v) => /female/i.test(v.name)) || vs[0] || null;
-}
-if ('speechSynthesis' in window) {
-  pickVoice();
-  speechSynthesis.addEventListener?.('voiceschanged', pickVoice);
-}
-
-export function stopSpeech() {
-  if ('speechSynthesis' in window) speechSynthesis.cancel();
-}
-
-// Speaks text; resolves when finished. Always takes at least a natural
-// speaking time so game pacing stays calm when muted or voices are missing.
-export function say(text, { pitch = 1.25, rate = 0.92, interrupt = true } = {}) {
-  const minTime = new Promise((r) => setTimeout(r, Math.min(2600, 250 + (text || '').length * 55)));
-  const spoken = new Promise((resolve) => {
-    if (muted || !('speechSynthesis' in window) || !text) { resolve(); return; }
-    if (interrupt) speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    if (voice) u.voice = voice;
-    u.lang = voice?.lang || 'en-US';
-    u.pitch = pitch;
-    u.rate = rate;
-    let done = false;
-    const finish = () => { if (!done) { done = true; resolve(); } };
-    u.onend = finish;
-    u.onerror = finish;
-    setTimeout(finish, 600 + text.length * 90);
-    speechSynthesis.speak(u);
-  });
-  return Promise.all([minTime, spoken]).then(() => undefined);
 }
