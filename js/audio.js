@@ -78,6 +78,7 @@ export const sfx = {
   whoosh() { noise({ dur: 0.35, vol: 0.35, freq: 900, q: 0.5 }); },
   thud(step = 0) { tone({ type: 'sine', from: 160 + step * 25, to: 70, dur: 0.18, vol: 0.7 }); tone({ type: 'triangle', from: 400 + step * 60, dur: 0.12, vol: 0.2, at: 0.02 }); },
   flip() { tone({ type: 'triangle', from: 500, to: 900, dur: 0.1, vol: 0.25 }); },
+  brush() { noise({ dur: 0.12, vol: 0.12, freq: 2600, q: 0.6 }); },
   splash() { noise({ dur: 0.25, vol: 0.35, freq: 1800, q: 0.7 }); tone({ type: 'sine', from: 700, to: 1200, dur: 0.15, vol: 0.2 }); },
   crash() { for (let i = 0; i < 6; i++) { noise({ dur: 0.15, vol: 0.4, freq: 300 + i * 120, at: i * 0.07 }); tone({ type: 'sine', from: 200 - i * 15, to: 60, dur: 0.2, vol: 0.4, at: i * 0.07 }); } },
   success() { [523, 659, 784, 1046].forEach((f, i) => tone({ type: 'triangle', from: f, dur: 0.3, vol: 0.35, at: i * 0.11 })); },
