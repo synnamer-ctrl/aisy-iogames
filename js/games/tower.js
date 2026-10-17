@@ -149,22 +149,41 @@ export default {
       api.confetti(80);
       stack.forEach((b) => flash(b.el, 'happy', 1600));
       await api.wait(1400);
-      await api.celebrate();
-      // Wobble... and tumble!
+      // Wobble... then CRASH: every block tumbles down and lands in a heap on the ground.
       tower.style.transformOrigin = `${stack[0].x}px ${groundY}px`;
       tower.classList.add('wobble');
       await api.wait(900);
       tower.classList.remove('wobble');
       api.sfx.crash();
-      [...stack.map((b) => b.el), star].forEach((el, j) => {
+      setCam(0); // glide back down so the landing is in view
+      const pieces = [...stack.map((b) => ({ el: b.el, x: b.x, ...dims(b.shape) })), { el: star, x: top.x, w: cw, h: chh }];
+      let longest = 0;
+      pieces.forEach((p, j) => {
         const dir = Math.random() < 0.5 ? -1 : 1;
-        el.classList.add('talk');
-        el.animate(
-          [{ transform: getComputedStyle(el).transform }, { transform: `translate(${W / 2 + dir * (W * 0.6 + j * 20)}px, ${groundY + H}px) rotate(${dir * (200 + j * 30)}deg)` }],
-          { duration: 1100 + j * 40, easing: 'cubic-bezier(.4,-0.3,.7,1)', fill: 'forwards' },
+        const turns = [90, 180, 270, 360][Math.floor(Math.random() * 4)];
+        // A block turned on its side rests on its long edge.
+        const half = turns % 180 ? p.w / 2 : p.h / 2;
+        const cx = Math.max(p.w / 2, Math.min(W - p.w / 2, p.x + dir * (40 + Math.random() * W * 0.28)));
+        const tx = cx - p.w / 2, ty = groundY - half - p.h / 2 + p.h * 0.06;
+        const rot = dir * turns;
+        const delay = (pieces.length - 1 - j) * 60; // the top tumbles first
+        const dur = 850 + Math.random() * 250;
+        longest = Math.max(longest, delay + dur);
+        p.el.classList.add('talk');
+        p.el.animate(
+          [
+            { transform: getComputedStyle(p.el).transform },
+            { transform: `translate(${tx}px, ${ty}px) rotate(${rot}deg)`, offset: 0.78, easing: 'cubic-bezier(.3,0,.6,1)' },
+            { transform: `translate(${tx + dir * 10}px, ${ty - p.h * 0.18}px) rotate(${rot + dir * 8}deg)`, offset: 0.89 },
+            { transform: `translate(${tx + dir * 14}px, ${ty}px) rotate(${rot}deg)` },
+          ],
+          { duration: dur, delay, easing: 'cubic-bezier(.45,0,.9,.6)', fill: 'forwards' },
         );
+        api.wait(delay + dur * 0.78).then(() => api.sfx.thud(Math.max(0, 6 - (j % 6))));
       });
-      await api.wait(1300);
+      await api.wait(longest + 300);
+      await api.wait(1200); // let him enjoy the mess
+      await api.celebrate();
       level++;
       newLevel();
     }
