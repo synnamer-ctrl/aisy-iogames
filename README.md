@@ -29,6 +29,7 @@ and a big orange 🏠 button to go home. 🔊 toggles all sound.
 - Plain HTML/CSS/JS ES modules, no build step and no dependencies.
 - Every character is a hand-drawn SVG (`js/characters.js`) animated with CSS (`css/style.css`).
 - Animals are SVG in a 3D-render cartoon style (`js/toon.js` shading kit, `js/toon-animals.js` drawings).
+- Painted backgrounds (`img/bg/`) and 3D-style food art (`img/food/`) were generated with SpriteCook and saved as small WebP files.
 - Real animal recordings live in `sounds/` (CC0 / public domain / CC BY, credited in-app via the ⓘ button).
 - Other sound effects (pops, dings, piano notes) are synthesized with WebAudio. There is no text-to-speech.
 - `sw.js` caches everything so it works fully offline once opened.

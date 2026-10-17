@@ -1,5 +1,5 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v12';
+const VERSION = 'aisy-v13';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
   'js/app.js', 'js/audio.js', 'js/animals.js', 'js/toon.js', 'js/toon-animals.js', 'js/characters.js', 'js/util.js',
@@ -7,6 +7,8 @@ const ASSETS = [
   'js/games/counting.js', 'js/games/shapes.js', 'js/games/peekaboo.js', 'js/games/tower.js',
   'js/games/memory.js', 'js/games/piano.js', 'js/games/paint.js', 'js/games/paint-pages.js', 'js/games/sounds.js', 'js/games/whosays.js',
   ...['cat', 'dog', 'bunny', 'bear', 'frog', 'squirrel', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'].map((k) => `sounds/${k}.mp3`),
+  ...['carrot', 'bone', 'banana', 'fish', 'honey', 'corn', 'apple', 'acorn', 'bamboo'].map((k) => `img/food/${k}.webp`),
+  'img/bg/meadow.webp', 'img/bg/sea.webp',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png',
 ];
 

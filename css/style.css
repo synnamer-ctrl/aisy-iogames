@@ -93,7 +93,7 @@ svg { display: block; }
 
 /* ================= splash ================= */
 .splash {
-  background: linear-gradient(#6CCFF6 0%, #BDEBFF 62%, #7ED957 62%, #58C13B 100%);
+  background: url(../img/bg/meadow.webp) center bottom / cover no-repeat, linear-gradient(#6CCFF6 0%, #BDEBFF 62%, #7ED957 62%, #58C13B 100%);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3vmin; cursor: pointer;
 }
 .splash-sun { position: absolute; top: -4vmin; right: -2vmin; width: 30vmin; height: 30vmin; }
@@ -110,7 +110,7 @@ svg { display: block; }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
 /* ================= home ================= */
-.home { background: linear-gradient(#6CCFF6, #C9F0FF); display: flex; flex-direction: column; }
+.home { background: url(../img/bg/meadow.webp) center bottom / cover no-repeat, linear-gradient(#6CCFF6, #C9F0FF); display: flex; flex-direction: column; }
 .home-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: var(--top) 18px 6px; }
 .tiles {
   flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
@@ -181,7 +181,7 @@ svg { display: block; }
 .confetti i { position: absolute; top: 0; border-radius: 3px; }
 
 /* ================= 1. bubbles ================= */
-.g-bubbles { background: linear-gradient(#74D3FF, #1C7ED6 85%, #E9C46A 85%); overflow: hidden; }
+.g-bubbles { background: url(../img/bg/sea.webp) center bottom / cover no-repeat, linear-gradient(#74D3FF, #1C7ED6 85%, #E9C46A 85%); overflow: hidden; }
 .bubble {
   position: absolute; top: 0; display: block; border-radius: 50%;
   background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, .95) 0 7%, rgba(255, 255, 255, .15) 9% 62%, rgba(255, 255, 255, .5) 100%);
@@ -193,9 +193,6 @@ svg { display: block; }
 .pop-ring { position: absolute; translate: -50% -50%; border-radius: 50%; border: 6px solid #fff; pointer-events: none; animation: ring .45s ease-out forwards; }
 @keyframes ring { from { scale: .6; opacity: 1; } to { scale: 1.5; opacity: 0; } }
 .pop-count { position: absolute; top: calc(var(--top) + 12px); left: 0; right: 0; text-align: center; font-size: clamp(22px, 4.5vmin, 38px); pointer-events: none; z-index: 5; }
-.seaweed { position: absolute; bottom: 10%; width: 40px; height: 22%; background: #2F9E44; border-radius: 30px 30px 0 0; border: 4px solid var(--ol); animation: sway 3s ease-in-out infinite; transform-origin: bottom; }
-.seaweed.s1 { left: 8%; } .seaweed.s2 { left: 14%; height: 15%; animation-delay: -1s; } .seaweed.s3 { right: 10%; height: 26%; animation-delay: -2s; }
-@keyframes sway { 0%, 100% { rotate: -8deg; } 50% { rotate: 8deg; } }
 
 /* ================= 2. feed ================= */
 .g-feed { background: linear-gradient(#FFE8A3, #FFD08A 70%, #E8A15A 70%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 60px; }
@@ -208,7 +205,7 @@ svg { display: block; }
 .tray { display: flex; gap: 4vmin; justify-content: center; padding: 2vmin 0; }
 .food-item { width: min(24vw, 20vh); height: min(24vw, 20vh); background: #fff; border: 5px solid var(--ol); border-radius: 50%; padding: 2.4vmin; box-shadow: 0 6px 0 rgba(0, 0, 0, .2); cursor: grab; z-index: 5; position: relative; }
 .food-item.dragging { z-index: 10; cursor: grabbing; box-shadow: 0 14px 20px rgba(0, 0, 0, .25); }
-.food { width: 100%; height: 100%; overflow: visible; }
+.food { width: 100%; height: 100%; object-fit: contain; overflow: visible; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .18)); -webkit-user-drag: none; pointer-events: none; }
 
 /* ================= 3. colors ================= */
 .g-colors { background: linear-gradient(#FFF0F6, #FFD8E8); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5vmin; padding: 80px 10px 60px; }
