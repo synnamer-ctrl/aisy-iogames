@@ -1,14 +1,19 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v13';
+const VERSION = 'aisy-v14';
+const ANIMALS = ['elephant', 'giraffe', 'hippo', 'monkey', 'panda', 'parrot', 'penguin', 'pig', 'bunny', 'snake'];
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
-  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/toon.js', 'js/toon-animals.js', 'js/characters.js', 'js/util.js',
+  'js/app.js', 'js/audio.js', 'js/animals.js', 'js/characters.js', 'js/util.js',
   'js/games/index.js', 'js/games/bubbles.js', 'js/games/feed.js', 'js/games/colors.js',
   'js/games/counting.js', 'js/games/shapes.js', 'js/games/peekaboo.js', 'js/games/tower.js',
   'js/games/memory.js', 'js/games/piano.js', 'js/games/paint.js', 'js/games/paint-pages.js', 'js/games/sounds.js', 'js/games/whosays.js',
-  ...['cat', 'dog', 'bunny', 'bear', 'frog', 'squirrel', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'].map((k) => `sounds/${k}.mp3`),
-  ...['carrot', 'bone', 'banana', 'fish', 'honey', 'corn', 'apple', 'acorn', 'bamboo'].map((k) => `img/food/${k}.webp`),
-  'img/bg/meadow.webp', 'img/bg/sea.webp',
+  ...['elephant', 'monkey', 'panda', 'parrot', 'pig', 'bunny', 'snake'].map((k) => `sounds/${k}.mp3`),
+  ...ANIMALS.map((k) => `img/kenney/animals/${k}.png`),
+  ...['red', 'blue', 'yellow', 'green', 'purple', 'pink'].flatMap((c) => ['square', 'circle', 'rhombus', 'squircle'].map((b) => `img/kenney/shapes/${c}_${b}.png`)),
+  'img/kenney/shapes/red_triangle.png', 'img/kenney/faces/face_a.png',
+  ...['bubble.png', 'bush.png', 'star-coin.png', 'cloud1.png', 'moon_half.png', 'symbol_01.png', 'symbol_02.png', 'star_06.png', 'star_07.png',
+    'castle.webp', 'talltrees.webp', 'forest.webp', 'sky.webp'].map((f) => `img/kenney/scene/${f}`),
+  ...['carrot', 'banana', 'bamboo', 'fish', 'apple', 'corn'].map((k) => `img/food/${k}.webp`),
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png',
 ];
 

@@ -5,7 +5,7 @@ export default {
   id: 'sounds',
   title: 'Animal Sounds',
   color: '#FF8787',
-  icon: () => `<div class="icon-sounds">${animal('cow')}<span>🔊</span></div>`,
+  icon: () => `<div class="icon-sounds">${animal('elephant')}<span>🔊</span></div>`,
   start(stage, api) {
     const root = h(`<div class="g-sounds"><div class="snd-grid"></div></div>`);
     stage.appendChild(root);

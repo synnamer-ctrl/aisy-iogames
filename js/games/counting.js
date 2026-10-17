@@ -7,7 +7,7 @@ export default {
   id: 'counting',
   title: 'Count 1-2-3',
   color: '#9775FA',
-  icon: () => `<div class="icon-count">${animal('chick')}<b>123</b></div>`,
+  icon: () => `<div class="icon-count">${animal('pig')}<b>123</b></div>`,
   start(stage, api) {
     const root = h(`<div class="g-count">
         <div class="tally"></div>

@@ -81,6 +81,8 @@ export const sfx = {
   brush() { noise({ dur: 0.12, vol: 0.12, freq: 2600, q: 0.6 }); },
   splash() { noise({ dur: 0.25, vol: 0.35, freq: 1800, q: 0.7 }); tone({ type: 'sine', from: 700, to: 1200, dur: 0.15, vol: 0.2 }); },
   crash() { for (let i = 0; i < 6; i++) { noise({ dur: 0.15, vol: 0.4, freq: 300 + i * 120, at: i * 0.07 }); tone({ type: 'sine', from: 200 - i * 15, to: 60, dur: 0.2, vol: 0.4, at: i * 0.07 }); } },
+  // A friendly cartoon grunt for an animal with no recording.
+  honk() { tone({ type: 'triangle', from: 150, to: 110, dur: 0.22, vol: 0.6 }); tone({ type: 'triangle', from: 170, to: 120, dur: 0.3, vol: 0.6, at: 0.26 }); noise({ dur: 0.2, vol: 0.15, freq: 300, at: 0.26 }); },
   success() { [523, 659, 784, 1046].forEach((f, i) => tone({ type: 'triangle', from: f, dur: 0.3, vol: 0.35, at: i * 0.11 })); },
   fanfare() {
     [523, 659, 784, 1046, 784, 1046].forEach((f, i) => tone({ type: 'square', from: f, dur: 0.22, vol: 0.12, at: i * 0.13 }));
@@ -94,7 +96,8 @@ export const sfx = {
 };
 
 /* ---------- real animal recordings (sounds/*.mp3) ---------- */
-export const SOUND_KINDS = ['cat', 'dog', 'bunny', 'bear', 'frog', 'squirrel', 'chick', 'lion', 'cow', 'monkey', 'elephant', 'panda'];
+// Animals with a recording. The others (giraffe, hippo, penguin) honk instead.
+export const SOUND_KINDS = ['elephant', 'monkey', 'panda', 'parrot', 'pig', 'bunny', 'snake'];
 const buffers = {};
 let loading = null;
 let playing = null;

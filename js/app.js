@@ -1,6 +1,6 @@
 import { GAMES } from './games/index.js';
 import { sfx, unlockAudio, isMuted, setMuted, animalSound, stopAnimalSound } from './audio.js';
-import { animal, blox, sun } from './characters.js';
+import { animal, blox, sun, ANIMAL_KINDS } from './characters.js';
 import { h, pick, rnd, sleep } from './util.js';
 
 const app = document.getElementById('app');
@@ -20,7 +20,9 @@ function makeSession(stage) {
     // game still breathes between steps. The text only sizes the pause.
     pause: (text = '') => s.wait(Math.min(1200, 200 + text.length * 25)),
     // Real animal recording (silently skipped if it can't play).
-    sound: async (kind) => { if (s.alive) await animalSound(kind); },
+    sound: async (kind) => {
+      if (s.alive && !(await animalSound(kind)) && s.alive && !isMuted()) { sfx.honk(); await sleep(600); }
+    },
     // Promise that simply never resolves once the player has left the game,
     // so `await api.wait()` chains stop on their own.
     wait: (ms) => new Promise((r) => {
@@ -45,13 +47,14 @@ function makeSession(stage) {
 function confetti(n = 70) {
   const layer = h('<div class="confetti"></div>');
   document.body.appendChild(layer);
-  const colors = ['#FF5A5F', '#FFD43B', '#51CF66', '#3FA7F5', '#B57EDC', '#FF922B', '#FF8FC7'];
+  const colors = ['#DE5A72', '#FDC249', '#6BC785', '#779CEA', '#9C68E7', '#FF922B', '#FF8FD7'];
+  const bits = ['symbol_02', 'symbol_02', 'symbol_01', 'star_06'];
   for (let i = 0; i < n; i++) {
     const p = document.createElement('i');
     p.style.left = rnd(0, 100) + 'vw';
     p.style.background = pick(colors);
-    p.style.width = p.style.height = rnd(8, 16) + 'px';
-    if (Math.random() < 0.4) p.style.borderRadius = '50%';
+    p.style.width = p.style.height = rnd(18, 34) + 'px';
+    p.style.webkitMaskImage = p.style.maskImage = `url(img/kenney/scene/${pick(bits)}.png)`;
     p.animate(
       [{ transform: `translate(0,-10vh) rotate(0)` }, { transform: `translate(${rnd(-20, 20)}vw, 110vh) rotate(${rnd(360, 1080)}deg)` }],
       { duration: rnd(1600, 3000), delay: rnd(0, 500), easing: 'cubic-bezier(.3,.4,.6,1)', fill: 'both' },
@@ -62,10 +65,9 @@ function confetti(n = 70) {
 }
 
 async function celebrate(text) {
-  const kinds = ['bear', 'bunny', 'cat', 'dog', 'panda', 'frog', 'squirrel', 'lion', 'monkey', 'chick', 'elephant', 'cow'];
   const ov = h(`<div class="celebrate">
       <div class="cel-star">${starSvg()}</div>
-      <div class="cel-friends">${[0, 1, 2].map(() => `<div class="cel-friend happy talk">${animal(pick(kinds))}</div>`).join('')}</div>
+      <div class="cel-friends">${[0, 1, 2].map(() => `<div class="cel-friend happy talk">${animal(pick(ANIMAL_KINDS))}</div>`).join('')}</div>
     </div>`);
   document.body.appendChild(ov);
   sfx.fanfare();
@@ -76,9 +78,7 @@ async function celebrate(text) {
   ov.remove();
 }
 function starSvg() {
-  return `<svg viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 37 L69 58 L79 92 L50 72 L21 92 L31 58 L4 37 L38 36 Z" fill="#FFD43B" stroke="#4A2E1F" stroke-width="4" stroke-linejoin="round"/>
-    <circle cx="41" cy="48" r="4" fill="#4A2E1F"/><circle cx="59" cy="48" r="4" fill="#4A2E1F"/>
-    <path d="M42 58 Q50 66 58 58" fill="none" stroke="#4A2E1F" stroke-width="3.5" stroke-linecap="round"/></svg>`;
+  return `<img src="img/kenney/scene/star-coin.png" alt="" draggable="false">`;
 }
 
 /* ---------- screens ---------- */
@@ -98,8 +98,8 @@ function showSplash() {
       <div class="splash-sun">${sun()}</div>
       <h1 class="logo"><span>Aisy's</span> Play Land</h1>
       <div class="splash-friends">
-        <div class="sf">${animal('bunny')}</div><div class="sf">${animal('bear')}</div>
-        <div class="sf">${blox('red')}</div><div class="sf">${animal('cat')}</div><div class="sf">${animal('frog')}</div>
+        <div class="sf">${animal('bunny')}</div><div class="sf">${animal('panda')}</div>
+        <div class="sf">${blox('red')}</div><div class="sf">${animal('pig')}</div><div class="sf">${animal('penguin')}</div>
       </div>
       <button class="play-big" aria-label="Play">
         <svg viewBox="0 0 100 100"><path d="M36 24 L78 50 L36 76 Z" fill="#fff" stroke="#fff" stroke-width="10" stroke-linejoin="round"/></svg>
@@ -146,16 +146,15 @@ function showHome() {
 // Grown-up page: where the real animal recordings come from (some licences require credit).
 function showCredits() {
   const ov = h(`<div class="credits"><div class="credits-card">
-      <h2>Animal sound credits</h2>
+      <h2>Credits</h2>
       <ul>
-        <li>Kitten, cow, chick: BigSoundBank.com by Joseph Sardin (CC0)</li>
-        <li>Puppy: "Labrador Barking Dog" by Daniel Simion, SoundBible.com (CC BY 3.0)</li>
-        <li>Frog: "Frog Croaking" by snottyboy, SoundBible.com (CC BY 3.0)</li>
-        <li>Lion, elephant, chimpanzee: Mike Koenig, SoundBible.com (CC BY 3.0)</li>
-        <li>Bear: U.S. Fish &amp; Wildlife Service via SoundBible.com (public domain)</li>
-        <li>Squirrel: U.S. National Park Service via SoundBible.com (public domain)</li>
+        <li>Pictures: Kenney.nl sprite packs (CC0)</li>
+        <li>Elephant, chimpanzee: Mike Koenig, SoundBible.com (CC BY 3.0)</li>
         <li>Panda: "Giant panda twittering", Wikimedia Commons (public domain)</li>
         <li>Rabbit: "Rabbit oinks and squeaks" by kessir, Wikimedia Commons (CC0)</li>
+        <li>Pig: "Grumpy pig" by Joseph Sardin, BigSoundBank.com (CC0)</li>
+        <li>Parrot: "Parrots Talking", SoundBible.com (public domain)</li>
+        <li>Snake: "Rattlesnake Rattle", SoundBible.com (public domain)</li>
       </ul>
       <p>Clips were trimmed and volume-levelled. Licences: CC0 and public domain need no credit; CC BY 3.0 = creativecommons.org/licenses/by/3.0</p>
       <button>OK</button></div></div>`);

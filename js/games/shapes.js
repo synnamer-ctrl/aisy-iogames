@@ -5,7 +5,7 @@ export default {
   id: 'shapes',
   title: 'Shapes',
   color: '#20C997',
-  icon: () => `<div class="icon-shapes">${shape('star')}${shape('circle')}</div>`,
+  icon: () => `<div class="icon-shapes">${shape('diamond')}${shape('circle')}</div>`,
   start(stage, api) {
     const root = h(`<div class="g-shapes">
         <div class="sorter"><div class="holes"></div></div>
@@ -23,7 +23,7 @@ export default {
       let target;
       do target = pick(SHAPE_KINDS); while (target === last);
       last = target;
-      const n = done < 5 ? 3 : 4;
+      const n = Math.min(done < 5 ? 3 : 4, SHAPE_KINDS.length);
       const set = shuffle([target, ...sample(SHAPE_KINDS.filter((s) => s !== target), n - 1)]);
       holes.innerHTML = '';
       dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < done % 5 ? 'on' : ''}"></i>`).join('');

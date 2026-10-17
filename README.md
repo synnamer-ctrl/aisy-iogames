@@ -1,13 +1,13 @@
 # Aisy's Play Land 🐻🧱🎈
 
 A toddler game box (made for ages 3–4): **12 mini-games in one installable, offline PWA.**
-No ads, no reading and no talking voice: just real animal sounds and playful sound effects. The animals are soft 3D-style
-cartoon baby animals (smooth shading, glossy eyes, no outlines) that blink, look around, talk and wag,
-and they make **real recorded animal sounds** (see `sounds/CREDITS.md`).
+No ads, no reading and no talking voice: just real animal sounds and playful sound effects. All the art comes from
+free [Kenney](https://kenney.nl) sprite packs (CC0): round flat-style animal friends, shape buddies with faces,
+and storybook scenery. The animals bob, hop and chatter, and they make **real recorded animal sounds** (see `sounds/CREDITS.md`).
 
 | # | Game | What your child practices |
 |---|------|---------------------------|
-| ★ | **Animal Sounds** – tap any of 12 animals to hear its real sound | animal sounds & names |
+| ★ | **Animal Sounds** – tap any of 10 animals to hear its real sound | animal sounds & names |
 | ★ | **Who Says That?** – a real sound plays, tap the animal that made it | listening, matching |
 | 1 | **Bubble Pop** – tap rising bubbles to free the animals inside | tapping, animal names |
 | 2 | **Feed Me** – drag (or tap) the right food to the hungry animal | matching, fine motor drag |
@@ -27,9 +27,10 @@ and a big orange 🏠 button to go home. 🔊 toggles all sound.
 ## Tech
 
 - Plain HTML/CSS/JS ES modules, no build step and no dependencies.
-- Every character is a hand-drawn SVG (`js/characters.js`) animated with CSS (`css/style.css`).
-- Animals are SVG in a 3D-render cartoon style (`js/toon.js` shading kit, `js/toon-animals.js` drawings).
-- Painted backgrounds (`img/bg/`) and 3D-style food art (`img/food/`) were generated with SpriteCook and saved as small WebP files.
+- Sprites come from the Kenney packs in `sprites/` (animal faces, shape characters, jumper pack, background scenes,
+  particles); the ones the game uses are copied into `img/kenney/`. `js/characters.js` wraps each one in an SVG so
+  CSS (`css/style.css`) can animate it.
+- Feed Me's foods (`img/food/`) were generated with SpriteCook, since the Kenney packs only have a carrot.
 - Real animal recordings live in `sounds/` (CC0 / public domain / CC BY, credited in-app via the ⓘ button).
 - Other sound effects (pops, dings, piano notes) are synthesized with WebAudio. There is no text-to-speech.
 - `sw.js` caches everything so it works fully offline once opened.

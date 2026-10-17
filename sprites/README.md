@@ -3,7 +3,8 @@
 Sprite packs by [Kenney](https://kenney.nl), released under **CC0 1.0** (public domain):
 free for any use, commercial included, no credit required. Each folder keeps its original `License.txt`.
 
-These are a library to pick from; the game doesn't load them yet, and the service worker doesn't cache them.
+The game's art comes from these packs. The files it actually uses are copied (resized, and backgrounds
+converted to WebP) into `img/kenney/`; this folder is the full library to pick more from.
 Open `preview.png` in each folder to see everything at a glance.
 
 | Folder | What's inside | Sprites |
