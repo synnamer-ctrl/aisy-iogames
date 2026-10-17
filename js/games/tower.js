@@ -74,6 +74,7 @@ export default {
       root.appendChild(mover);
       flash(mover, 'pop-in', 500);
       busy = false;
+      if (resizeLater) onResize();
     }
 
     const t0 = performance.now();
@@ -189,9 +190,11 @@ export default {
     }
 
     // Rotating the device: rebuild sizes and re-stack the tower in place.
-    let lastW = 0;
+    let lastW = 0, resizeLater = false;
     const onResize = () => {
-      if (!root.isConnected || busy || root.clientWidth === lastW) return;
+      if (!root.isConnected || root.clientWidth === lastW) return;
+      resizeLater = busy; // mid-drop or mid-win: redo it when the next block appears
+      if (busy) return;
       const oldW = W;
       layout();
       lastW = W;

@@ -1,5 +1,5 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v15';
+const VERSION = 'aisy-v16';
 const ANIMALS = ['elephant', 'giraffe', 'hippo', 'monkey', 'panda', 'parrot', 'penguin', 'pig', 'bunny', 'snake'];
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
@@ -17,8 +17,23 @@ const ASSETS = [
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png',
 ];
 
+// Fill the new cache; a file the network can't deliver right now is carried
+// over from the previous cache, so a flaky update never loses offline files.
+// If a file is in neither, the install fails and the old version keeps working.
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(VERSION).then((c) => Promise.all(ASSETS.map((a) => c.add(a).catch(() => {})))).then(() => self.skipWaiting()));
+  e.waitUntil((async () => {
+    const c = await caches.open(VERSION);
+    await Promise.all(ASSETS.map(async (a) => {
+      try {
+        await c.add(new Request(a, { cache: 'reload' }));
+      } catch {
+        const old = await caches.match(a, { ignoreSearch: true });
+        if (!old) throw new Error(`could not cache ${a}`);
+        await c.put(a, old);
+      }
+    }));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', (e) => {
@@ -46,6 +61,6 @@ self.addEventListener('fetch', (e) => {
     caches.match(req, { ignoreSearch: true }).then((hit) => hit || fetch(req).then((res) => {
       if (res.ok) { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); }
       return res;
-    }).catch(() => caches.match('index.html'))),
+    }).catch(() => (req.mode === 'navigate' ? caches.match('index.html') : Response.error()))),
   );
 });

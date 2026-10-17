@@ -115,6 +115,12 @@ export function preloadAnimalSounds() {
   return loading;
 }
 
+// Recorded animals whose sound is ready (all of them until loading has finished).
+export function playableKinds() {
+  const ready = SOUND_KINDS.filter((k) => buffers[k]);
+  return ready.length >= 2 ? ready : SOUND_KINDS;
+}
+
 export function stopAnimalSound() {
   try { playing?.stop(); } catch { /* already stopped */ }
   playing = null;
