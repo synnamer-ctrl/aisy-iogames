@@ -1,5 +1,5 @@
 // Offline-first service worker. Bump VERSION when files change.
-const VERSION = 'aisy-v14';
+const VERSION = 'aisy-v15';
 const ANIMALS = ['elephant', 'giraffe', 'hippo', 'monkey', 'panda', 'parrot', 'penguin', 'pig', 'bunny', 'snake'];
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',

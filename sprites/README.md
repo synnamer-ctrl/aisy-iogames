@@ -13,6 +13,8 @@ Open `preview.png` in each folder to see everything at a glance.
 | `background-elements/` | Clouds, trees, bushes, cacti, houses, castles, fences, hills, sun and moon | 110 |
 | `jumper-pack/` | Bright platformer bits: bunny player, clouds, platforms, springs, coins, stars, power-ups, enemies, HUD | 121 |
 | `shape-characters/` | Shapes with faces in many colours (circles, squares, triangles, stars…) plus separate faces | 208 |
+| `animal-pack-remastered/` | 30 animal faces (bear, cow, dog, duck, frog, horse, owl, whale, zebra…), PNG + SVG | 240 |
+| `openclipart-animals/` | 44 full-body cartoon animals as SVG, from Openclipart (CC0); used for the Paint pages | 44 |
 | `particle-pack/` | Transparent effects: stars, sparkles, smoke, flames, glows, magic | 80 |
 
-Source pages: kenney.nl/assets/animal-pack, /background-elements, /jumper-pack, /shape-characters, /particle-pack.
+Source pages: kenney.nl/assets/animal-pack, /animal-pack-remastered, /background-elements, /jumper-pack, /shape-characters, /particle-pack.

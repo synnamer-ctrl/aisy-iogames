@@ -18,7 +18,7 @@ and storybook scenery. The animals bob, hop and chatter, and they make **real re
 | 7 | **Blox Tower** – tap to drop glossy toy blocks (cubes, bricks, pillars, drums); levels of 5–15 blocks under day, sunset, night and space skies, crowned with a golden star | timing, cause & effect, counting |
 | 8 | **Match Pairs** – flip cards to find two the same (2 → 4 pairs) | memory |
 | 9 | **Animal Piano** – 8 singing animal keys: tap them or slide a finger across; 8 songs to play along | music, cause & effect |
-| 10 | **Paint** – draw free-hand with a finger on 20 colouring pictures; paint never goes outside the lines | colours, creativity, fine motor |
+| 10 | **Paint** – draw free-hand with a finger on 54 colouring pictures (44 full-body animals, 10 scenes); paint never goes outside the lines | colours, creativity, fine motor |
 
 Toddler-friendly by design: huge touch targets, no failure states (wrong answers just get a gentle
 wiggle), a celebration with confetti every few successes, no long-press menus or pinch zoom,
@@ -31,6 +31,8 @@ and a big orange 🏠 button to go home. 🔊 toggles all sound.
   particles); the ones the game uses are copied into `img/kenney/`. `js/characters.js` wraps each one in an SVG so
   CSS (`css/style.css`) can animate it.
 - Feed Me's foods (`img/food/`) were generated with SpriteCook, since the Kenney packs only have a carrot.
+- Paint's colouring pages are generated from vector art by `tools/paint-pages/build.sh`: full-body cartoon animals
+  from Openclipart (CC0, `sprites/openclipart-animals/`) placed in Kenney scenery.
 - Real animal recordings live in `sounds/` (CC0 / public domain / CC BY, credited in-app via the ⓘ button).
 - Other sound effects (pops, dings, piano notes) are synthesized with WebAudio. There is no text-to-speech.
 - `sw.js` caches everything so it works fully offline once opened.

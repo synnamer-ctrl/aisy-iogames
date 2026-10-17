@@ -3,8 +3,8 @@ import { PAGES } from './paint-pages.js';
 
 // Free-hand painting that never goes outside the lines: a stroke belongs to
 // the paint area it started in and is clipped to that area's shape. Areas are
-// stacked in page order (later ones cover earlier ones, like the drawing), and
-// the black outlines are drawn over all the paint.
+// stacked in page order (later ones cover earlier ones, like the drawing), each
+// with its outline just above its paint; eyes and other details go on top.
 
 const NS = 'http://www.w3.org/2000/svg';
 const COLORS = ['#FF5A5F', '#FF922B', '#FFD43B', '#51CF66', '#3FA7F5', '#B57EDC', '#FF8FC7', '#8B5A2B', '#74C0FC', '#2B2B2B'];
@@ -145,11 +145,14 @@ export default {
         const paint = el('g', { 'clip-path': `url(#${clipId})`, 'pointer-events': 'none' });
         art.append(area, paint);
         layers.push(paint);
+        // Each outline sits right above its own paint, so things in front
+        // (an animal) cover the lines of things behind (a hill).
         if (hasLine) {
           const line = document.importNode(node, true);
           line.removeAttribute('class');
           line.setAttribute('fill', 'none');
-          top.appendChild(line);
+          line.setAttribute('pointer-events', 'none');
+          art.appendChild(line);
         }
         n++;
       }
