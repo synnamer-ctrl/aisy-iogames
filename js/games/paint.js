@@ -111,11 +111,9 @@ export default {
           celebrated = true;
           api.confetti(80);
           api.sfx.fanfare();
-          api.say('Beautiful! What a lovely picture!');
         }
       }));
       flash(canvas, 'pop-in', 600);
-      api.say(`Let's paint the ${PAGES[page].name}!`);
     }
     root.querySelector('.prev').addEventListener('click', () => { api.sfx.whoosh(); load(page - 1); });
     root.querySelector('.next').addEventListener('click', () => { api.sfx.whoosh(); load(page + 1); });

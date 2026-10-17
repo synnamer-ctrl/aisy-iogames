@@ -35,15 +35,14 @@ export default {
         row.appendChild(s);
         return s;
       });
-      await api.say('Look at all my friends!');
+      await api.pause('Look at all my friends!');
       await api.wait(900);
       api.sfx.whoosh();
       spots.forEach((s) => s.classList.remove('up'));
-      await api.say('They are hiding!');
+      await api.pause('They are hiding!');
       who.innerHTML = animal(target);
       who.classList.add('show');
       ready = true;
-      api.say(`Where is the ${ANIMALS[target].name}?`);
 
       async function tap(s, k) {
         if (!ready || s.classList.contains('up')) return;
@@ -53,7 +52,7 @@ export default {
         if (k !== target) {
           s.querySelector('.hider').classList.add('talk');
           await api.sound(k);
-          await api.say(`Hi! I'm the ${ANIMALS[k].name}!`, { pitch: 1.5 });
+          await api.pause(`Hi! I'm the ${ANIMALS[k].name}!`);
           await api.wait(300);
           s.classList.remove('up');
           s.querySelector('.hider').classList.remove('talk');
@@ -65,7 +64,7 @@ export default {
         api.confetti(30);
         found++;
         dots.innerHTML = Array.from({ length: 4 }, (_, i) => `<i class="${i < (found % 4 || 4) ? 'on' : ''}"></i>`).join('');
-        await api.say(`Peekaboo! You found the ${ANIMALS[k].name}!`);
+        await api.pause(`Peekaboo! You found the ${ANIMALS[k].name}!`);
         await api.sound(k);
         await api.wait(500);
         if (found % 4 === 0) await api.celebrate('You found everybody! Hooray!');

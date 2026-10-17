@@ -22,11 +22,10 @@ export default {
         await api.sound(k);
         if (my !== token) return;
         b.classList.remove('talk');
-        await api.say(cap(ANIMALS[k].name) + '!', { rate: 1 });
+        await api.pause(cap(ANIMALS[k].name) + '!');
         if (my === token) b.classList.remove('happy', 'on');
       });
       grid.appendChild(b);
     });
-    api.say('Tap an animal to hear what it says!');
   },
 };

@@ -14,7 +14,6 @@ export default {
     stage.appendChild(root);
     const counter = root.querySelector('.pop-count');
     let pops = 0;
-    api.say('Pop the bubbles!');
 
     function spawn() {
       if (root.querySelectorAll('.bubble:not(.popped)').length >= 7) return;

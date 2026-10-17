@@ -1,5 +1,5 @@
 import { animal, ANIMALS, ANIMAL_KINDS } from '../characters.js';
-import { h, sample, shuffle, flash, cap } from '../util.js';
+import { h, sample, shuffle, flash } from '../util.js';
 
 export default {
   id: 'memory',
@@ -35,13 +35,12 @@ export default {
         return c;
       });
 
-      await api.say('Look! Remember the friends!');
+      await api.pause('Look! Remember the friends!');
       await api.wait(1200);
       api.sfx.flip();
       cards.forEach((c) => c.classList.remove('flipped'));
       await api.wait(400);
       lock = false;
-      api.say('Find two the same!');
 
       async function flip(c, k) {
         if (lock || c.classList.contains('flipped')) return;
@@ -59,13 +58,13 @@ export default {
           matched++;
           if (matched === pairs) {
             await api.sound(a.k);
-            await api.say(`Two ${ANIMALS[a.k].plural}!`);
+            await api.pause(`Two ${ANIMALS[a.k].plural}!`);
             level++;
             await api.celebrate('You found all the pairs!');
             round();
             return;
           }
-          api.sound(a.k).then(() => api.say(`${cap(ANIMALS[a.k].name)}! A match!`));
+          api.sound(a.k);
           lock = false;
         } else {
           await api.wait(900);

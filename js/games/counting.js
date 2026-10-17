@@ -42,16 +42,14 @@ export default {
           flash(a, 'happy', 1500);
           api.sfx.note(260 * Math.pow(2, (counted - 1) * 2 / 12) * 1.5, 0.35);
           tally.appendChild(h(`<span class="tally-dot">${counted}</span>`));
-          if (counted < n) {
-            api.say(WORDS[counted], { rate: 1 });
-          } else {
-            await api.say(WORDS[counted], { rate: 1 });
+          if (counted === n) {
+            await api.pause(WORDS[counted]);
             bigNum.textContent = n;
             bigNum.classList.add('show');
             field.querySelectorAll('.counter-pal').forEach((p) => p.classList.add('happy', 'talk'));
             api.sfx.success();
             await api.sound(kind);
-            await api.say(`${WORDS[n]} ${n === 1 ? ANIMALS[kind].name : ANIMALS[kind].plural}! ${api.praise()}`);
+            await api.pause(`${WORDS[n]} ${n === 1 ? ANIMALS[kind].name : ANIMALS[kind].plural}! ${api.praise()}`);
             await api.wait(500);
             rounds++;
             if (rounds % 4 === 0) await api.celebrate('You are a counting star!');
@@ -60,7 +58,6 @@ export default {
         });
         field.appendChild(a);
       }
-      api.say(n === 1 ? `Tap the ${ANIMALS[kind].name}!` : `Let's count the ${ANIMALS[kind].plural}! Tap each one.`);
     }
     round();
   },

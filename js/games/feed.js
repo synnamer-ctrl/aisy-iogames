@@ -1,5 +1,5 @@
-import { animal, food, ANIMALS, FOOD_FOR } from '../characters.js';
-import { h, pick, sample, shuffle, draggable, inside, flyTo, flash, cap } from '../util.js';
+import { animal, food, FOOD_FOR } from '../characters.js';
+import { h, pick, sample, shuffle, draggable, inside, flyTo, flash } from '../util.js';
 
 export default {
   id: 'feed',
@@ -33,7 +33,7 @@ export default {
       tray.innerHTML = '';
       dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < fed % 5 ? 'on' : ''}"></i>`).join('');
       // the thought bubble hint shows after a moment, in case it's tricky
-      setTimeout(() => spot.querySelector('.thought')?.classList.add('show'), 4500);
+      setTimeout(() => spot.querySelector('.thought')?.classList.add('show'), 1500);
 
       shuffle([want, ...others]).forEach((f) => {
         const item = h(`<div class="food-item">${food(f)}</div>`);
@@ -43,14 +43,12 @@ export default {
           onTap: () => choose(item, f),
         });
       });
-      api.say(`${cap(ANIMALS[kind].name)} is hungry! What does ${ANIMALS[kind].name} eat?`);
 
       function choose(item, f) {
         if (busy) return false;
         if (f !== want) {
           api.sfx.wrong();
           flash(eater, 'no', 600);
-          api.say(pick(['No thank you!', 'Hmm, not that one!', 'Yucky! Try another one!']));
           return false;
         }
         busy = true;
@@ -66,7 +64,7 @@ export default {
           api.sfx.success();
           fed++;
           dots.innerHTML = Array.from({ length: 5 }, (_, i) => `<i class="${i < (fed % 5 || 5) ? 'on' : ''}"></i>`).join('');
-          await api.say('Yum yum!');
+          await api.pause('Yum yum!');
           await api.sound(kind);
           await api.wait(400);
           if (fed % 5 === 0) await api.celebrate('All the friends are full! Great job!');

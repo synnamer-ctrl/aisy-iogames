@@ -79,10 +79,9 @@ export default {
         stack.push({ el, x });
         stack.forEach((b) => flash(b.el, 'happy', 900));
         if (stack.length >= maxBlocks) {
-          await api.say(WORDS[i] || '', { rate: 1.1 });
+          await api.pause(WORDS[i] || '');
           topple();
         } else {
-          api.say(WORDS[i] || '', { rate: 1.1 });
           await api.wait(250);
           newMover();
         }
@@ -90,13 +89,12 @@ export default {
     }
 
     async function topple() {
-      await api.say('Wow! So tall!');
+      await api.pause('Wow! So tall!');
       tower.style.transformOrigin = `${stack[0].x}px ${groundY}px`;
       tower.classList.add('wobble');
       await api.wait(1100);
       tower.classList.remove('wobble');
       api.sfx.crash();
-      api.say('Crash! Whee!', { pitch: 1.5 });
       stack.forEach((b, j) => {
         const dir = Math.random() < 0.5 ? -1 : 1;
         b.el.classList.add('talk');
@@ -137,6 +135,5 @@ export default {
     root.addEventListener('pointerdown', (e) => { if (!e.target.closest('button')) drop(); });
     layout();
     newMover();
-    api.say('Tap to drop the blocks! Build a big tower!');
   },
 };

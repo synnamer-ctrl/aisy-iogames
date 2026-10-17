@@ -1,6 +1,6 @@
 import { GAMES } from './games/index.js';
-import { sfx, say, stopSpeech, unlockAudio, isMuted, setMuted, animalSound, stopAnimalSound } from './audio.js';
-import { animal, blox, sun, ANIMALS } from './characters.js';
+import { sfx, unlockAudio, isMuted, setMuted, animalSound, stopAnimalSound } from './audio.js';
+import { animal, blox, sun } from './characters.js';
 import { h, pick, rnd, sleep } from './util.js';
 
 const app = document.getElementById('app');
@@ -16,12 +16,11 @@ function makeSession(stage) {
     timers: new Set(),
     cleanups: [],
     sfx,
-    say: (t, o) => (s.alive ? say(t, o) : Promise.resolve()),
-    // Real animal recording; falls back to saying the sound if it can't play.
-    sound: async (kind) => {
-      if (!s.alive) return;
-      if (!(await animalSound(kind)) && s.alive) await say(ANIMALS[kind].sound);
-    },
+    // No spoken voice: a short silent beat where a prompt would go, so the
+    // game still breathes between steps. The text only sizes the pause.
+    pause: (text = '') => s.wait(Math.min(1200, 200 + text.length * 25)),
+    // Real animal recording (silently skipped if it can't play).
+    sound: async (kind) => { if (s.alive) await animalSound(kind); },
     // Promise that simply never resolves once the player has left the game,
     // so `await api.wait()` chains stop on their own.
     wait: (ms) => new Promise((r) => {
@@ -71,7 +70,7 @@ async function celebrate(text) {
   document.body.appendChild(ov);
   sfx.fanfare();
   confetti(90);
-  await Promise.all([say(text), sleep(2300)]);
+  await sleep(2300);
   ov.classList.add('out');
   await sleep(350);
   ov.remove();
@@ -110,7 +109,6 @@ function showSplash() {
   el.addEventListener('pointerup', () => {
     unlockAudio();
     sfx.success();
-    say("Hi Aisy! Let's play!");
     showHome();
   }, { once: true });
 }
@@ -167,7 +165,6 @@ function showCredits() {
 
 function openGame(game) {
   endCurrent();
-  stopSpeech();
   app.innerHTML = '';
   const el = h(`<section class="screen game game-${game.id}" style="--bg:${game.color}">
       <div class="stage"></div>
@@ -195,7 +192,6 @@ function endCurrent() {
   if (current) {
     current.session.end();
     current = null;
-    stopSpeech();
     stopAnimalSound();
     document.querySelectorAll('.celebrate, .confetti').forEach((el) => el.remove());
   }
@@ -203,7 +199,7 @@ function endCurrent() {
 
 // Quiet everything when the app is put in the background.
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { stopSpeech(); stopAnimalSound(); }
+  if (document.hidden) stopAnimalSound();
 });
 
 window.addEventListener('popstate', () => {
